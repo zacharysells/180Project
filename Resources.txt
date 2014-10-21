@@ -1,0 +1,9 @@
+EAN API : https://secure.mashery.com/login/devsecure.ean.com/
+Username : ucrhotel
+password : 180project
+
+online js, html, css editor 
+http://jsbin.com/?html,output
+
+
+examples : hotel.com / expedia.com 
