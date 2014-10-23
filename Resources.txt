@@ -7,3 +7,10 @@ http://jsbin.com/?html,output
 
 
 examples : hotel.com / expedia.com 
+
+Ruby on Rails: 
+	www.railscasts.com
+	guides.rubyonrails.org/getting_started.html
+	
+Bootstrap:
+	www.getbootstrap.com
