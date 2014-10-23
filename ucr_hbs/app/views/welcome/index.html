@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+</head>
+    <title>HotelExpress.com</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<body>
+<div>
+    <h2>Find the Lowest reservasion prices on HotelExpress!</h2>
+    <form action="/search" method="get" id="searchform" autocomplete="off">
+        <fieldset>
+            <h1>Look up your Hotel here!</h1>
+            <input type="text" autocorrect="off" autocomplete="off" name="destination"
+                id="destination" value="Riverside, California"
+                    data-label="Current location" data-position-unavailable-msg="Unable to acquire current position"
+                    data-timeout-occured-msg="Timeout occured while acquiring current position "
+                    data-unknown-location-error-msg="Unknown error occured while acquiring current position"
+                    data-destination-id="1504033" class="input-clear-btn">
+            <label>Address, Hotel name or Destination</lable>
+        </fieldset>
+        <fieldset>
+            <label>check in</label>
+            <input type="text" name="arrival" placeholder="mm/dd/yy">
+            <label>Check out</label>
+            <input type="text" name="depart" placeholder="mm/dd/yy">
+        </fieldset>
+        <fieldset>
+            <label for="">Rooms</label>
+            <select id="rooms" name="rooms">
+                <option value"1">1</option>
+                <option value"2">2</option>
+                <option value"3">3</option>
+                <option value"4">4</option>
+                <option value"5">5</option>
+                <option value"6">6</option>
+                <option value"7">7</option>
+                <option value"8">8</option>
+                <option value"9">9</option>
+                <option value"10">10+</option>
+            </select>
+            <label for="">Adults</label>
+            <select id="adults" name="adults">
+                <option value"1">1</option>
+                <option value"2">2</option>
+                <option value"3">3</option>
+                <option value"4">4</option>
+                <option value"5">5</option>
+                <option value"6">6</option>
+                <option value"7">7</option>
+                <option value"8">8</option>
+            </select>
+            <label for="">Children</label>
+            <select id="child" name="child">
+                <option value"1">1</option>
+                <option value"2">2</option>
+                <option value"3">3</option>
+                <option value"4">4</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <button name="search">Search</button>
+        </fieldset>
+    </form>
+
+</div>
+</body>
+</html>
