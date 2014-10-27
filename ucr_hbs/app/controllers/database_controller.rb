@@ -1,3 +1,5 @@
+
+require 'Hotel'
 class DatabaseController < ApplicationController					
   
   def search
@@ -26,9 +28,7 @@ class DatabaseController < ApplicationController
 	
 	#make http request
 	response = HTTParty.get(request)
-	@hotelList = JSON.parse(response.body)
-	@hotelId = @hotelList["hotelId"]
-	
+	@hotel = Hotel.new(JSON.parse(response.body))
 
 	
   end
