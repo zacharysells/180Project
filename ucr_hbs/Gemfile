@@ -1,3 +1,4 @@
+#<<<<<<< Local Changes
 source 'https://rubygems.org'
 
 
@@ -25,6 +26,13 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 
   
+#<<<<<<< Local Changes
+#<<<<<<< Local Changes
+#<<<<<<< Local Changes
+
+#=======
+  gem 'activemerchant'
+
   gem 'therubyracer'
   gem 'less-rails'
   gem 'twitter-bootstrap-rails', '~> 3.2.0'
@@ -32,6 +40,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
   gem 'devise'
   
   gem 'httparty' #For http requests and processing json responses
+#>>>>>>> External Changes
   
 
 
@@ -50,3 +59,5 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+#=======
+#>>>>>>> External Changes

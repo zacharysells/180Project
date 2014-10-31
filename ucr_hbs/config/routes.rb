@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   devise_for :users
   get 'welcome/index'
+  post 'welcome/index'
   
   get 'database/search', to: 'database#search'
 
