@@ -7,4 +7,6 @@ class ApplicationController < ActionController::Base
     @search_params = params
   end
   
+  
+  
 end

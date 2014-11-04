@@ -7,12 +7,12 @@ class DatabaseController < ApplicationController
 	#search parameters
 	cid = "55505"
 	apiKey = "vbcytyyspe2t9c64rv5vxmep"
-	destinationString = "riverside"
+	destinationString = params[:city]
 	#city = "Seattle"
 	stateProvinceCode = "CA"
 	#countryCode = "US"
-	arrivalDate = "09/04/2015"
-	departureDate = "09/05/2015"
+	arrivalDate = "11/09/2015"
+	departureDate = "11/10/2015"
 	numberOfResults = "7"
 	
 	#construct http request
@@ -48,7 +48,7 @@ class DatabaseController < ApplicationController
 				@destinationList << Destination.new(destinationInfo)
 			end
 				
-			#redirect_to root_url
+			redirect_to '/database/altList'
 		end
 	
 	
