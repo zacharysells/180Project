@@ -1,0 +1,31 @@
+<HTML>
+
+<h1>Database#search</h1>
+
+<body>
+<p>Find me in app/views/database/search.html.erb</p>
+
+
+
+<p> Destination List size: <%= @destinationListSize%></p>
+
+<% (0..(@destinationListSize)).each do |i| %>
+
+	<p> Destination ID: <%=@destinationList[i].destinationId %></p>
+	<p> Destination City: <%=@destinationList[i].city %></p>
+	<p> Destination State: <%=@destinationList[i].stateProvinceCode %></p>
+	<p> Destination Country: <%=@destinationList[i].countryName %></p>
+	
+	<p>------------------------------------------------------------------</p>
+
+<% end %>
+
+
+<p> Response: <%= @response %></p>
+
+
+
+
+
+</body>
+</HTML>
