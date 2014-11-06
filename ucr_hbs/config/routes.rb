@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   post 'database/getList'
   
   get 'database/altList'
+  
+  get 'database/reserve'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

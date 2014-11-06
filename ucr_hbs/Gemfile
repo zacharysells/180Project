@@ -33,7 +33,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 #=======
   gem 'activemerchant'
 
-  gem 'therubyracer'
+  gem 'therubyracer', '~> 0.10.2'
   gem 'less-rails'
   gem 'twitter-bootstrap-rails', '~> 3.2.0'
   
