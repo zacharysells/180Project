@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   
   get 'database/getList', to: 'database#getList'
   post 'database/getList'
-  
 
   get 'database/hotelInfo'
   post 'database/getHotelInfo'
