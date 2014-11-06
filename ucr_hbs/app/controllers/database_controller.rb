@@ -1,22 +1,29 @@
 
 require 'Hotel'
 require 'Destination'
-class DatabaseController < ApplicationController					
+class DatabaseController < ApplicationController	
+  
+  # Input: Date Hash
+  # Output: Formatted Date String MM/DD/YYYY
+  def DateFormat(date)
+    @newDate = date[:month] + "/" + date[:day] + "/" + date[:year]
+    return @newDate
+  end				
   
   def getList()
-	#search parameters
-	cid = "55505"
-	apiKey = "vbcytyyspe2t9c64rv5vxmep"
-	destinationString = params[:city]
-	#city = "Seattle"
-	stateProvinceCode = "CA"
-	#countryCode = "US"
-	arrivalDate = "11/09/2015"
-	departureDate = "11/10/2015"
-	numberOfResults = "7"
+	  #search parameters
+	  cid = "55505"
+	  apiKey = "vbcytyyspe2t9c64rv5vxmep"
+	  destinationString = params[:city].gsub(' ', '+')
+	  #city = "Seattle"
+	  stateProvinceCode = "CA"
+	  #countryCode = "US"
+	  arrivalDate =  DateFormat(params[:start_date])
+	  departureDate = DateFormat(params[:departure])
+	  numberOfResults = "7"
 	
-	#construct http request
-	request = "http://dev.api.ean.com/ean-services/rs/hotel/v3/list?" \
+	  #construct http request
+	  request = "http://dev.api.ean.com/ean-services/rs/hotel/v3/list?" \
 			+ "cid=" + cid \
 			+ "&apiKey=" + apiKey \
 			+ "&destinationString=" + destinationString \
@@ -30,15 +37,15 @@ class DatabaseController < ApplicationController
 	
 	
 	
-	#make http request
-	response = JSON.parse(HTTParty.get(request).body)
+	    #make http request
+	    response = JSON.parse(HTTParty.get(request).body)
 	
 	
-	# Check for EanWsError
-	if response["HotelListResponse"]["EanWsError"] then
-		@hotelError = response["HotelListResponse"]["EanWsError"]
+	    # Check for EanWsError
+	    if response["HotelListResponse"]["EanWsError"] then
+		    @hotelError = response["HotelListResponse"]["EanWsError"]
 		
-		if @hotelError["category"] = "DATA_VALIDATION" then
+		    if @hotelError["category"] = "DATA_VALIDATION" then
 			#create list of suggested destinations
 			@destinationList = []
 			@destinationListSize = Integer(response["HotelListResponse"]["LocationInfos"]["@size"]) -1 
@@ -48,7 +55,7 @@ class DatabaseController < ApplicationController
 				@destinationList << Destination.new(destinationInfo)
 			end
 				
-			redirect_to '/database/altList'
+			#redirect_to '/database/altList'
 		end
 	
 	
