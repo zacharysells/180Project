@@ -11,12 +11,13 @@
 
 <% (0..(@destinationListSize)).each do |i| %>
 
+	<div class="jumbotron">
 	<p> Destination ID: <%=@destinationList[i].destinationId %></p>
 	<p> Destination City: <%=@destinationList[i].city %></p>
 	<p> Destination State: <%=@destinationList[i].stateProvinceCode %></p>
 	<p> Destination Country: <%=@destinationList[i].countryName %></p>
-	
-	<p>------------------------------------------------------------------</p>
+	 <%= button_to "Make a Reservation" %> <%= button_to "More Info", method: "Tester" %>
+	</div>
 
 <% end %>
 

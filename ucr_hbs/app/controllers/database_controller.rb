@@ -3,6 +3,11 @@ require 'Hotel'
 require 'Destination'
 class DatabaseController < ApplicationController	
   
+  @rando
+  def Tester
+    @rando = "buttsex"
+  end
+  
   # Input: Date Hash
   # Output: Formatted Date String MM/DD/YYYY
   def DateFormat(date)
