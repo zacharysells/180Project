@@ -16,7 +16,8 @@ class Hotel
 	attr_accessor :shortDescription
 	attr_accessor :hotelRating
 	attr_accessor :hotelPrice
-	#add more hotel attributes as desired
+	attr_accessor :hotelAmenities
+	attr_accessor :hotelPictures
 	#thumbnail picture
 	#pictures
 	#features

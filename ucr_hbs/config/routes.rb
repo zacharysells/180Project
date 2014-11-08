@@ -8,6 +8,10 @@ Rails.application.routes.draw do
   get 'database/getList', to: 'database#getList'
   post 'database/getList'
   
+
+  get 'database/hotelInfo'
+  post 'database/getHotelInfo'
+
   get 'database/altList'
 
   # The priority is based upon order of creation: first created -> highest priority.
