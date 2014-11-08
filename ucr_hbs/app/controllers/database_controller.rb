@@ -10,8 +10,7 @@ $gNumberOfResults = "7"
 
 $gERROR_CATEGORY_RESULT_NULL = "RESULT_NULL"
 $gERROR_CATEGORY_DATA_VALIDATION = "DATA_VALIDATION"
-class DatabaseController < ApplicationController					
->>>>>>> zach_branch
+class DatabaseController < ApplicationController
   
   def getHotelInfo()
 
@@ -96,7 +95,6 @@ class DatabaseController < ApplicationController
 			+ "cid=" + $gCid \
 			+ "&apiKey=" + $gApiKey \
 			+ "&numberOfResults=" + $gNumberOfResults \
->>>>>>> zach_branch
 			+ "&destinationString=" + destinationString \
 			+ "&propertyName=" + propertyName \
 			+ "&stateProvinceCode=" + stateProvinceCode \
@@ -104,20 +102,7 @@ class DatabaseController < ApplicationController
 			+ "&arrivalDate=" + arrivalDate \
 			+ "&departureDate=" + departureDate
 			
-	
-<<<<<<< HEAD
-	
-	
-	    #make http request
-	    response = JSON.parse(HTTParty.get(request).body)
-	
-	
-	    # Check for EanWsError
-	    if response["HotelListResponse"]["EanWsError"] then
-		    @hotelError = response["HotelListResponse"]["EanWsError"]
-		
-		    if @hotelError["category"] = "DATA_VALIDATION" then
-=======
+
 	#make http request
 	response = JSON.parse(HTTParty.get(request).body)
 	puts request
@@ -128,7 +113,6 @@ class DatabaseController < ApplicationController
 		
 		#Multiple possible destination error.
 		if hotelError["category"] == $gERROR_CATEGORY_DATA_VALIDATION then
->>>>>>> zach_branch
 			#create list of suggested destinations
 			
 
@@ -140,10 +124,6 @@ class DatabaseController < ApplicationController
 				#destinationInfo = response["HotelListResponse"]["LocationInfos"]["LocationInfo"][i]
 				#@destinationList << Destination.new(destinationInfo)
 			#end
-				
-<<<<<<< HEAD
-			#redirect_to '/database/altList'
-=======
 			redirect_to '/database/altList'
 
 
@@ -155,9 +135,7 @@ class DatabaseController < ApplicationController
 			#	   Currently sending them back to the homepage
 			redirect_to root_url
 
->>>>>>> zach_branch
 		end
-	
 	#We got a valid response. Parse the response and create a list of hotel objects
 	else 
 	
