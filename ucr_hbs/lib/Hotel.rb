@@ -4,6 +4,7 @@ $gHotelShortDescription = "shortDescription"
 $gHotelCity = "city"
 $gHotelState = "stateProvinceCode"
 $gHotelRating = "hotelRating"
+
 $gHotelHighRate = "highRate"
 $gHotelLowRate = "lowRate"
 
@@ -14,14 +15,19 @@ class Hotel
 	attr_accessor :stateProvinceCode
 	attr_accessor :shortDescription
 	attr_accessor :hotelRating
-	attr_accessor :highRate
-	attr_accessor :lowRate
-	#add more hotel attributes as desired
+	attr_accessor :hotelPrice
+	attr_accessor :hotelAmenities
+	attr_accessor :hotelPictures
+	#thumbnail picture
+	#pictures
+	#features
+	#reviews
+	#price of rooms
 	
 	
 	def initialize(hotelSummary)
 		
-		#Array of Information about hotel
+		#Information about hotel
 		
 		@hotelId = hotelSummary[$gHotelId]
 		@name = hotelSummary[$gHotelName]
@@ -29,8 +35,7 @@ class Hotel
 		@stateProvinceCode = hotelSummary[$gHotelState]
 		@shortDescription = hotelSummary[$gHotelShortDescription]
 		@hotelRating = hotelSummary[$gHotelRating]
-		@highRate = hotelSummary[$gHotelHighRate]
-		@lowRate = hotelSummary[$gHotelLowRate]
+		@hotelPrice = hotelSummary[$gHotelHighRate]
 	
 	end
 
