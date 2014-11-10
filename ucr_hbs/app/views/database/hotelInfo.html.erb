@@ -1,0 +1,12 @@
+<h1>Hotel Info</h1>
+<p>Find me in app/views/welcome/index.html.erb</p>
+
+<p> Size of amenities list: <%=@hotelAmenitiesListSize %></p>
+
+<% (0..(@hotel.hotelAmenities.size - 1)).each do |i| %>
+	<p> Amenity: <%=@hotel.hotelAmenities[i] %></p>
+<% end %>
+
+<% (0..(@hotel.hotelPictures.size - 1)).each do |i| %>
+	<p> Pictures: <%=@hotel.hotelPictures[i] %></p>
+<% end %>
