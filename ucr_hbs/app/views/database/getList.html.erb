@@ -1,0 +1,22 @@
+<HTML>
+
+<h1>Select a Hotel</h1>
+
+<body>
+
+<% (0..(@hotelListSize)).each do |i| %>
+	
+	<div class="jumbotron">
+			<legend><%=@hotelList[i].name %></legend>
+			<div class="form-group">
+				<p> City: <%=@hotelList[i].city %></p>
+				<p> Price: <%=@hotelList[i].hotelPrice %></p>
+				<p> User Rating: <%=@hotelList[i].hotelRating %></p>
+				<p> Star Level: </p>
+				<p> Thumbnail: </p>
+			</div>
+		<%= button_to "Select", {:action =>"getHotelInfo", :controller => "database", :hotelId => @hotelList[i].hotelId } %>
+	</div>
+<% end %>
+</body>
+</HTML>
