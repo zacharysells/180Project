@@ -1,0 +1,6 @@
+#app/views/profiles/edit.html.erb
+<%= form_for @profile do |f| %>
+    <% @attributes.each do |attr| %>
+       <%= f.text_field attr.to_sym %>
+    <% end %>
+<% end %>
