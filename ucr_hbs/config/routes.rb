@@ -1,6 +1,23 @@
 Rails.application.routes.draw do
+  
+
   devise_for :users
   get 'welcome/index'
+  post 'welcome/index'
+
+	resources :profiles
+  resources :reviews
+  
+  #get 'reviews/new', to: 'reviews#new'
+  
+  get 'database/getList', to: 'database#getList'
+  post 'database/getList'
+  
+
+  get 'database/hotelInfo'
+  post 'database/getHotelInfo'
+
+  get 'database/altList'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
