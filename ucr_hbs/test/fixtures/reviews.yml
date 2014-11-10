@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  hotel: MyString
+  rating: 9.99
+  text: MyText
+
+two:
+  hotel: MyString
+  rating: 9.99
+  text: MyText
