@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -52,6 +52,7 @@
 			  <li><% "Currently signed in." %></li>
 			  <li><%= link_to "Sign Out", destroy_user_session_path, :method => :delete %></li>
 			  <li><%= link_to "Make a Reservation", "/path3"  %></li>
+			  <li><%= link_to "Profile", "/profiles"  %></li>
 			  <% else %>
               <li><%= link_to "Login", new_user_session_path  %></li>
               <li><%= link_to "Register", new_user_registration_path  %></li>
@@ -62,7 +63,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="container">
       <div class="row">
         <div class="col-lg-9">
