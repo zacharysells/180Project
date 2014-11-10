@@ -1,0 +1,20 @@
+<h1>Test</h1>
+
+<%= form_for :review, url: reviews_path do |f| %>
+  <p>
+    <%= f.label :hotel %><br>
+    <%= f.text_field :hotel %>
+  </p>
+  <p>
+  	<%= f.label :rating %><br>
+  	<%= f.number_field :rating, in: 0.0..5.0, step: 0.5 %>
+  </p>
+  <p>
+    <%= f.label :text %><br>
+    <%= f.text_area :text %>
+  </p>
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
