@@ -1,20 +1,18 @@
 <h1>Payment for your Reservation</h1>
-<body>November 14, 2014 - November 26, 2014<br>
-Holiday Inn, 2 guests <br>
-1234 Parkway Springs Dr, Land, CA 95201 <br>
 
-</body>
-
+<%= form_tag :controller => 'reservations', :action => 'validate_credit_card', :method => 'post' do %> 
 <div class="jumbotron">
 <h3>Credit Card Information</h3>
 <div class="form-group">
-	<%= text_field_tag(:cardname, nil, placeholder:"Name on Card") %> 
+	<%= text_field_tag(:first_name, nil, placeholder:"First Name") %> 
+	<br>
+	<%= text_field_tag(:last_name, nil, placeholder:"Last Name") %> 
 	<br>
 	<%= text_field_tag(:ccn, nil, placeholder:"Card Number") %> 
 	<br>
 	<%= text_field_tag(:cvs, nil, placeholder:"CVS") %> 
 	<br>
-	<%= text_field_tag(:expdate, nil, placeholder:"Expires (MM/DD/YYYY)") %>
+	<%= text_field_tag(:expdate, nil, placeholder:"Expires (MM/YYYY)") %>
 	<br>
 	
 	<h3>Billing Address</h3>
@@ -233,7 +231,7 @@ Holiday Inn, 2 guests <br>
 		<option value="Solomon Islands">Solomon Islands</option>
 		<option value="Somalia">Somalia</option>
 		<option value="South Africa">South Africa</option>
-		<option value="South Georgia and The South Sandwich Islands">South Georgia and The South 			Sandwich Islands</option>
+		<option value="South Georgia and The South Sandwich Islands">South Georgia and The South Sandwich 		Islands</option>
 		<option value="Spain">Spain</option>
 		<option value="Sri Lanka">Sri Lanka</option>
 		<option value="Sudan">Sudan</option>
@@ -284,3 +282,4 @@ Holiday Inn, 2 guests <br>
     </div>
 </div>
 </div>
+<% end %>

@@ -3,13 +3,5 @@
 
 <%= render file: "database/_searchform" %>
 
-<div>
-	<%= @search_params[:name] %>
-	<%= @search_params[:city] %>
-	<%= if @search_params[:start_date] != nil
-			@search_params[:start_date][:month] + "/" + @search_params[:start_date][:day] + "/" + @search_params[:start_date][:year]
-		end%>
-</div>
-
 <p> <%= @hotelError %> </p>
 

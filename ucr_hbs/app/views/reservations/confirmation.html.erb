@@ -1,0 +1,9 @@
+<div class="jumbotron">
+	<h1>Reservation Summary</h1>
+		<p>Hotel <%= raw $name %></p>
+		<p>City <%= $city %></p>
+		<p>Arrival <%= $arrival %></p>
+		<p>Departure <%= $departure %></p>
+		<p>Price <%= $price %></p>
+		<%= button_to "Make Reservation", {:controller => "reservations", :action => "create"}, :method => "post" %>
+</div>
