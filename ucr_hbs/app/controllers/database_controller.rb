@@ -1,7 +1,7 @@
 
 require 'Hotel'
 require 'Destination'
-		
+
 $gAPI_url = "http://dev.api.ean.com/ean-services/rs/hotel/v3"
 $gCid = "55505"
 $gApiKey = "vbcytyyspe2t9c64rv5vxmep"
@@ -10,7 +10,8 @@ $gNumberOfResults = "7"
 
 $gERROR_CATEGORY_RESULT_NULL = "RESULT_NULL"
 $gERROR_CATEGORY_DATA_VALIDATION = "DATA_VALIDATION"
-class DatabaseController < ApplicationController					
+
+class DatabaseController < ApplicationController
   
   def getHotelInfo()
 
@@ -100,8 +101,8 @@ class DatabaseController < ApplicationController
 			+ "&city=" + city \
 			+ "&arrivalDate=" + arrivalDate \
 			+ "&departureDate=" + departureDate
-	
-  #make http request
+
+
 	response = JSON.parse(HTTParty.get(request).body)
 	puts request
 	
@@ -133,9 +134,8 @@ class DatabaseController < ApplicationController
 			    #TODO: Figure out what to do if no results were found.
 			    #	   Currently sending them back to the homepage
 			    redirect_to root_url
-
 		  end
-	
+
 	#We got a valid response. Parse the response and create a list of hotel objects
 	else 
 	
