@@ -24,6 +24,10 @@
 										:departure => params[:departure]			
 							}, 
 							method: "post" %>
+
+				<%= link_to "Make a Clean Reservation", controller: "reservations", action: "clean_index", 
+				            :params => {:hotel => @hotelList[i]}, 
+							method: "post" %>
 				<% end %>
 			</div>
 	</div>

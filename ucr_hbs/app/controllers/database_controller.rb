@@ -16,40 +16,50 @@ class DatabaseController < ApplicationController
 
 	  hotelId = params[:hotelId]
 
-	  #construct http request
-	  request = $gAPI_url + "/info?" \
-			      + "cid=" + $gCid \
-			      + "&apiKey=" + $gApiKey \
-			      + "&hotelId=" + hotelId \
-			      + "&options=" + "PROPERTY_AMENITIES,HOTEL_IMAGES"
+	#construct http request
+	request = $gAPI_url + "/info?" \
+			+ "cid=" + $gCid \
+			+ "&apiKey=" + $gApiKey \
+			+ "&hotelId=" + hotelId \
+			+ "&options=" + "HOTEL_SUMMARY,PROPERTY_AMENITIES,HOTEL_IMAGES"
 
-	    response = JSON.parse(HTTParty.get(request).body)
+	response = JSON.parse(HTTParty.get(request).body)
 
+	if response["HotelInformationResponse"]["EanWsError"] then
+		hotelError = response["HotelInformationResponse"]["EanWsError"]
 
-	    if response["HotelInformationResponse"]["EanWsError"] then
-		      hotelError = response["HotelInformationResponse"]["EanWsError"]
-
-		      #No results were returned
-		      if hotelError["category"] == $gERROR_CATEGORY_RESULT_NULL then
+		     #No results were returned
+		     if hotelError["category"] == $gERROR_CATEGORY_RESULT_NULL then
 
 			      #TODO: Figure out what to do if no results were found.
 		        #	   Currently sending them back to the homepage
 			      redirect_to root_url
 		      end
 
-	    #We got a valid response. Parse the response and create a list of hotel objects
-	    else
+	#We got a valid response. Parse the response and create a list of hotel objects
+	else
+		#Fill out hotel object with Hotel Summary
+		@hotel = Hotel.new(response["HotelInformationResponse"]["HotelSummary"])
 
-		    #Our hotelAmenitiesSize is subtracted by 1 because we only want up to last index
-		    #and the 0 position is included in the size
-		    #and ruby is being dumb and wont let me subtract it in the loop below
-		    @hotelAmenitiesList = []
-		    @hotelAmenitiesSize = Integer(response["HotelInformationResponse"]["PropertyAmenities"]["@size"]) -1 
+		#Fill out hotel object with Hotel Amenities
+		hotelAmenitiesList = []
+		hotelAmenitiesListSize = Integer(response["HotelInformationResponse"]["PropertyAmenities"]["@size"])
 
-		    #(0..(@hotelListSize)).each do |i|
-			  #hotelSummary = response["HotelListResponse"]["HotelList"]["HotelSummary"][i]
-			  #@hotelList << Hotel.new(hotelSummary)
-		    #end
+		(0..(hotelAmenitiesListSize - 1)).each do |i|
+			hotelAmenity = response["HotelInformationResponse"]["PropertyAmenities"]["PropertyAmenity"][i]["amenity"]
+			hotelAmenitiesList << hotelAmenity
+		end
+		@hotel.hotelAmenities = hotelAmenitiesList
+
+		#Fill out hotel object with Hotel Pictures
+		hotelPicturesList = []
+		hotelPicturesListSize = Integer(response["HotelInformationResponse"]["HotelImages"]["@size"])
+
+		(0..(hotelPicturesListSize - 1)).each do |i|
+			hotelPicture = response["HotelInformationResponse"]["HotelImages"]["HotelImage"][i]["url"]
+			hotelPicturesList << hotelPicture
+		end
+		@hotel.hotelPictures = hotelPicturesList
 
 		    render '/database/hotelInfo'
 
@@ -130,8 +140,6 @@ class DatabaseController < ApplicationController
 	else 
 	
 		#Our hotelListSize is subtracted by 1 because we only want up to last index
-		#and the 0 position is included in the size
-		#and ruby is being dumb and wont let me subtract it in the loop below
 		@hotelList = []
 		@hotelListSize = Integer(response["HotelListResponse"]["HotelList"]["@size"]) -1 
 					
