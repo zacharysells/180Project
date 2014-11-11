@@ -1,31 +1,33 @@
 <HTML>
 
-<h1>Database#search</h1>
+<h1>Select a Hotel</h1>
 
 <body>
-<p>Find me in app/views/database/search.html.erb</p>
 
-
-
-<p> Destination List size: <%= @destinationListSize%></p>
-
-<% (0..(@destinationListSize)).each do |i| %>
-
-	<p> Destination ID: <%=@destinationList[i].destinationId %></p>
-	<p> Destination City: <%=@destinationList[i].city %></p>
-	<p> Destination State: <%=@destinationList[i].stateProvinceCode %></p>
-	<p> Destination Country: <%=@destinationList[i].countryName %></p>
+<% (0..(@hotelListSize)).each do |i| %>
 	
-	<p>------------------------------------------------------------------</p>
+	<div class="jumbotron">
+			<legend><%= raw @hotelList[i].name %></legend>
+			<div class="form-group">
+				<p> City: <%= @hotelList[i].city %></p>
+				<p> Price: <%= @hotelList[i].hotelPrice %></p>
+				<p> User Rating: <%= @hotelList[i].hotelRating %></p>
+				<p> Star Level: </p>
+				<p> Thumbnail: <img src= <%= @hotelList[i].thumbNailUrl %> alt="Mountain View" ></p>
+				<% if user_signed_in? %>
+				<%= link_to "Make a Reservation", controller: "reservations", action: "index", 
+				            :params => {:name      => @hotelList[i].name,
+								        :city      => @hotelList[i].city,
+										:price     => @hotelList[i].hotelPrice,
+										:rating    => @hotelList[i].hotelRating,
+										:arrival   => params[:start_date],
+										:departure => params[:departure]			
+							}, 
+							method: "post" %>
 
+				<% end %>
+			</div>
+	</div>
 <% end %>
-
-
-<p> Response: <%= @response %></p>
-
-
-
-
-
 </body>
 </HTML>
