@@ -13,7 +13,7 @@
 				<p> Price: <%= @hotelList[i].hotelPrice %></p>
 				<p> User Rating: <%= @hotelList[i].hotelRating %></p>
 				<p> Star Level: </p>
-				<p> Thumbnail: </p>
+				<p> Thumbnail: <img src= <%= @hotelList[i].thumbNailUrl %> alt="Mountain View" ></p>
 				<% if user_signed_in? %>
 				<%= link_to "Make a Reservation", controller: "reservations", action: "index", 
 				            :params => {:name      => @hotelList[i].name,
@@ -25,9 +25,6 @@
 							}, 
 							method: "post" %>
 
-				<%= link_to "Make a Clean Reservation", controller: "reservations", action: "clean_index", 
-				            :params => {:hotel => @hotelList[i]}, 
-							method: "post" %>
 				<% end %>
 			</div>
 	</div>

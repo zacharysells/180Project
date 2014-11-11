@@ -31,7 +31,7 @@ class ReservationsController < ApplicationController
     redirect_to '/reservations/payment'
   end
   
-  def index
+  def clean_index
     $name      = params[:name]
     $city      = params[:city]
     $arrival   = Date.new(params[:arrival][:year].to_i, params[:arrival][:month].to_i, params[:arrival][:day].to_i)
