@@ -1,3 +1,6 @@
+require 'rubygems'
+require 'active_merchant'
+
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -5,6 +8,14 @@ class ApplicationController < ActionController::Base
   
   def StoreSearchParams(params)
     @search_params = params
+  end
+  
+  @payment_verified = false
+  
+  helper_method :Validate_Credit_Card
+  
+  def Validate_Credit_Card
+    return true
   end
   
   

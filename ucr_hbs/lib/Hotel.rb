@@ -8,6 +8,8 @@ $gHotelRating = "hotelRating"
 $gHotelHighRate = "highRate"
 $gHotelLowRate = "lowRate"
 
+$gHotelThumbnail = "thumbNailUrl"
+
 class Hotel
 	attr_accessor :hotelId
 	attr_accessor :name
@@ -18,11 +20,8 @@ class Hotel
 	attr_accessor :hotelPrice
 	attr_accessor :hotelAmenities
 	attr_accessor :hotelPictures
-	#thumbnail picture
-	#pictures
-	#features
-	#reviews
-	#price of rooms
+  attr_accessor :thumbNailUrl
+  
 	
 	
 	def initialize(hotelSummary)
@@ -36,6 +35,7 @@ class Hotel
 		@shortDescription = hotelSummary[$gHotelShortDescription]
 		@hotelRating = hotelSummary[$gHotelRating]
 		@hotelPrice = hotelSummary[$gHotelHighRate]
+    @thumbNailUrl = "http://images.travelnow.com" + hotelSummary[$gHotelThumbnail]
 	
 	end
 

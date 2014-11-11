@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141022211939) do
+ActiveRecord::Schema.define(version: 20141109013136) do
+
+  create_table "reservations", force: true do |t|
+    t.integer  "hotel_id"
+    t.date     "arrival_date"
+    t.date     "departure_date"
+    t.decimal  "rate"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "reservations", ["user_id"], name: "index_reservations_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

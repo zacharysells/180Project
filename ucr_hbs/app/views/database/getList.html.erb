@@ -7,15 +7,26 @@
 <% (0..(@hotelListSize)).each do |i| %>
 	
 	<div class="jumbotron">
-			<legend><%=@hotelList[i].name %></legend>
+			<legend><%= raw @hotelList[i].name %></legend>
 			<div class="form-group">
-				<p> City: <%=@hotelList[i].city %></p>
-				<p> Price: <%=@hotelList[i].hotelPrice %></p>
-				<p> User Rating: <%=@hotelList[i].hotelRating %></p>
+				<p> City: <%= @hotelList[i].city %></p>
+				<p> Price: <%= @hotelList[i].hotelPrice %></p>
+				<p> User Rating: <%= @hotelList[i].hotelRating %></p>
 				<p> Star Level: </p>
-				<p> Thumbnail: </p>
+				<p> Thumbnail: <img src= <%= @hotelList[i].thumbNailUrl %> alt="Mountain View" ></p>
+				<% if user_signed_in? %>
+				<%= link_to "Make a Reservation", controller: "reservations", action: "index", 
+				            :params => {:name      => @hotelList[i].name,
+								        :city      => @hotelList[i].city,
+										:price     => @hotelList[i].hotelPrice,
+										:rating    => @hotelList[i].hotelRating,
+										:arrival   => params[:start_date],
+										:departure => params[:departure]			
+							}, 
+							method: "post" %>
+
+				<% end %>
 			</div>
-		<%= button_to "Select", {:action =>"getHotelInfo", :controller => "database", :hotelId => @hotelList[i].hotelId } %>
 	</div>
 <% end %>
 </body>
