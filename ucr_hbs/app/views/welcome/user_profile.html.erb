@@ -27,7 +27,11 @@
        			<td><%= raw reservation.hotel_name %></td>
                 <td><%= reservation.arrival_date.to_formatted_s(:long_ordinal) %></td>
                 <td><%= reservation.departure_date.to_formatted_s(:long_ordinal) %></td>
+				<% if current_user.reviews.exists?(:hotel_id => reservation.hotel_id) %>
+				<td> <span class="label label-success">Reviewed</span></td>
+				<% else %>
 				<td> <%= button_to('Review', '/reviews/new', :params => {:hotel_id => reservation.hotel_id}, :class => 'btn btn-xs btn-primary') %> </td>
+				<% end %>
 			</tr>
 			<% end %>
         </tbody>
