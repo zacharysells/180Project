@@ -1,33 +1,72 @@
-<HTML>
+<!DOCTYPE html>
+<html lang="en">
 
-<h1>Select a Hotel</h1>
+<head>
+ <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-8">
+    
+                <h1>Search Results</h1>
+
+            </div>
+        </div>
+</head>
 
 <body>
+    <!-- Page Content -->
+    <div class="container">
+       
+        <% (0..(@hotelListSize)).each do |i| %>
+			 <!-- /.row -->
+			<div class="row">
+			
+				<div class="col-md-4">
+					<br />
+					<a href="#">
+						<img class="img-responsive" width="100" height="140" src=<%= @hotelList[i].thumbNailUrl %> alt="">
+					</a>
+				</div>
+				<div class="col-md-7">
+				
+					<h3><%= raw @hotelList[i].name %><font size="4"> &nbsp; &nbsp; $<%= @hotelList[i].hotelPrice %></font> </h3>
 
-<% (0..(@hotelListSize)).each do |i| %>
-	
-	<div class="jumbotron">
-			<legend><%= raw @hotelList[i].name %></legend>
-			<div class="form-group">
-				<p> City: <%= @hotelList[i].city %></p>
-				<p> Price: <%= @hotelList[i].hotelPrice %></p>
-				<p> User Rating: <%= @hotelList[i].hotelRating %></p>
-				<p> Star Level: </p>
-				<p> Thumbnail: <img src= <%= @hotelList[i].thumbNailUrl %> alt="Mountain View" ></p>
-				<% if user_signed_in? %>
-				<%= link_to "Make a Reservation", controller: "reservations", action: "index", 
-				            :params => {:name      => @hotelList[i].name,
-								        :city      => @hotelList[i].city,
-										:price     => @hotelList[i].hotelPrice,
-										:rating    => @hotelList[i].hotelRating,
-										:arrival   => params[:start_date],
-										:departure => params[:departure]			
-							}, 
-							method: "post" %>
-
-				<% end %>
+					<!-- Name / city / price / avg rate + stars / #of reviews / Thumbnail -->
+					<h4><strong><%= @hotelList[i].city %>, <%= @hotelList[i].stateProvinceCode %>
+					</strong> <font size="4"> &nbsp; &nbsp; Avg Rating: <%= @hotelList[i].hotelRating %> &nbsp; &nbsp; #of Reviews: NUMS </font></h4>
+					
+					<% str = (@hotelList[i].shortDescription)%>
+					<!-- Gsub magic to get rid of embedded html -->
+					<% replacements = [ ["&lt;b&gt;Property", ""], ["Location&lt;/b&gt;", ""],["&lt;br /&gt;", ""], ["&lt;p/&gt;", ""], ["&lt;p&gt;", ""], ["&lt;/p&gt;", ""], ["&lt;b&gt;", ""], ["&lt;/b&gt;", ""] ]
+					replacements.each {|replacement| str.gsub!(replacement[0], replacement[1])} %>
+					<p><%= raw str %><%= link_to "..more", controller: "database", action: "getHotelInfo", method: "post",
+				            :params => {:hotelId => @hotelList[i].hotelId,
+										:name => @hotelList[i].name,
+										:city => @hotelList[i].city,
+										:arrivalDate => @arrivalDate,
+										:departureDate => @departureDate,
+										:price => @hotelList[i].hotelPrice
+										}%></p>
+					
+					<%= button_to "View Hotel", {controller: "database", action: "getHotelInfo", method: "post",
+				            :params => {:hotelId => @hotelList[i].hotelId,
+										:name => @hotelList[i].name,
+										:city => @hotelList[i].city,
+										:arrivalDate => @arrivalDate,
+										:departureDate => @departureDate,
+										:price => @hotelList[i].hotelPrice
+										}}, {class: 'btn btn-primary'} %>
+					<br /><br />
+				</div>
+				<hr><hr>
+            <!-- /.row -->
 			</div>
-	</div>
-<% end %>
+			
+			<hr>
+			<hr>
+        <% end %>
+        <!-- /.row -->
+    </div>
+
 </body>
-</HTML>
+
+</html>

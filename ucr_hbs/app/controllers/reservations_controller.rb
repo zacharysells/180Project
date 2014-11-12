@@ -18,14 +18,14 @@ class ReservationsController < ApplicationController
                                              :departure_date => Date.tomorrow,
                                              :rate => 100.02
                                             )
-    redirect_to root_url
+    redirect_to '/reservations/confirmation'
   end
 
   def index
     $name      = params[:name]
     $city      = params[:city]
-    $arrival   = Date.new(params[:arrival][:year].to_i, params[:arrival][:month].to_i, params[:arrival][:day].to_i)
-    $departure = Date.new(params[:departure][:year].to_i, params[:departure][:month].to_i, params[:departure][:day].to_i) 
+    $arrival   = Date.new(params[:arrivalDate][:year].to_i, params[:arrivalDate][:month].to_i, params[:arrivalDate][:day].to_i)
+    $departure = Date.new(params[:departureDate][:year].to_i, params[:departureDate][:month].to_i, params[:departureDate][:day].to_i)
     $price     = (params[:price].to_i * ($departure - $arrival)).to_i
     $cc_errors = false
     redirect_to '/reservations/payment'
@@ -34,8 +34,8 @@ class ReservationsController < ApplicationController
   def clean_index
     $name      = params[:name]
     $city      = params[:city]
-    $arrival   = Date.new(params[:arrival][:year].to_i, params[:arrival][:month].to_i, params[:arrival][:day].to_i)
-    $departure = Date.new(params[:departure][:year].to_i, params[:departure][:month].to_i, params[:departure][:day].to_i) 
+    $arrival   = Date.new(params[:arrivalDate][:year].to_i, params[:arrivalDate][:month].to_i, params[:arrivalDate][:day].to_i)
+    $departure = Date.new(params[:departureDate][:year].to_i, params[:departureDate][:month].to_i, params[:departureDate][:day].to_i) 
     $price     = (params[:price].to_i * ($departure - $arrival)).to_i
     $cc_errors = false
     redirect_to '/reservations/payment'

@@ -17,16 +17,16 @@
 	
 	<h3>Billing Address</h3>
 	<br>
-	Full name <%= text_field_tag(:biladdname, nil) %> 
+	<%= text_field_tag(:biladdname, nil, placeholder: "Full Name") %> 
 	<br>
-	Address line 1 <%= text_field_tag(:add1, nil,placeholder:"Street address") %> 
+	<%= text_field_tag(:add1, nil, placeholder: "Street address") %> 
 	<br>
-	Address line 2	<%= text_field_tag(:add2, nil,placeholder:"Apartment, suite, etc.") %> 
+	<%= text_field_tag(:add2, nil, placeholder: "Apartment, suite, etc.") %> 
 	<br>
-	City <%= text_field_tag(:city, nil) %>
+	<%= text_field_tag(:city, nil, placeholder: "City") %>
 	<br>
-	State/Province/Region <%= text_field_tag(:state, nil) %>
-	<br>
+	<%= text_field_tag(:state, nil, placeholder: "State/Province/Region") %>
+	<br><br>
 	Country  <select id="countries" name="countries">
 		<option value="United States">United States</option>
 		<option value="Afghanistan">Afghanistan</option>
@@ -275,11 +275,10 @@
 	</select>
 
 	<br><br>
-	
-	
-    <div class="form-actions">
+	<div class="form-actions">
 	<%= submit_tag("Confirm") %>
     </div>
 </div>
 </div>
+
 <% end %>

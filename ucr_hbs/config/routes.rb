@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 
   get 'database/altList'
   
+  get 'database/errorPage'
+  
   get 'database/reserve'
   post 'database/reserve'
   
@@ -25,6 +27,8 @@ Rails.application.routes.draw do
   post 'reservations/payment'
   
   post 'reservations/validate_credit_card'
+
+  post 'reservations/index'
 
   root 'welcome#index'
   
