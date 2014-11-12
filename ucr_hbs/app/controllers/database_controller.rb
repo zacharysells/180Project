@@ -70,7 +70,6 @@ class DatabaseController < ApplicationController
 
   end
 
-
   # Input: Date Hash
   # Output: Formatted Date String MM/DD/YYYY
   def DateFormat(date)

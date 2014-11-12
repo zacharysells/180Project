@@ -1,11 +1,16 @@
 require 'rubygems'
 require 'active_merchant'
 
+require 'Hotel'
+require 'Destination'
+
 class ReservationsController < ApplicationController
 
+  $id
   $name      
   $city      
-  $price     
+  $price 
+  $rate    
   $arrival   
   $departure  
   
@@ -13,30 +18,23 @@ class ReservationsController < ApplicationController
 
   def create
     @user = current_user
-    @reservation = @user.reservations.create(:hotel_id => 123,
-                                             :arrival_date => Date.today,
-                                             :departure_date => Date.tomorrow,
-                                             :rate => 100.02
+    @reservation = @user.reservations.create(:hotel_id => $id,
+                                             :hotel_name => $name,
+                                             :arrival_date => $arrival,
+                                             :departure_date => $departure,
+                                             :rate => $rate
                                             )
     redirect_to root_url
   end
 
   def index
+    $id        = params[:id]
     $name      = params[:name]
     $city      = params[:city]
     $arrival   = Date.new(params[:arrival][:year].to_i, params[:arrival][:month].to_i, params[:arrival][:day].to_i)
     $departure = Date.new(params[:departure][:year].to_i, params[:departure][:month].to_i, params[:departure][:day].to_i) 
     $price     = (params[:price].to_i * ($departure - $arrival)).to_i
-    $cc_errors = false
-    redirect_to '/reservations/payment'
-  end
-  
-  def clean_index
-    $name      = params[:name]
-    $city      = params[:city]
-    $arrival   = Date.new(params[:arrival][:year].to_i, params[:arrival][:month].to_i, params[:arrival][:day].to_i)
-    $departure = Date.new(params[:departure][:year].to_i, params[:departure][:month].to_i, params[:departure][:day].to_i) 
-    $price     = (params[:price].to_i * ($departure - $arrival)).to_i
+    $rate = params[:price]
     $cc_errors = false
     redirect_to '/reservations/payment'
   end

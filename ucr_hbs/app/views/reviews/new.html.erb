@@ -1,0 +1,30 @@
+<div class="jumbotron">
+	<h3>Hotel Id: <%= $hotel_id %></h3>
+	<%= form_for :review, url: reviews_path do |f| %>
+	<div class="form-group">
+		
+		<%= f.label :stars %> <br />
+		
+		<%= label :stars, "1", :value => 1%>
+		<%= f.radio_button :stars, 1, :checked => true %>
+		
+		<%= label :stars, "2", :value => 2%>
+		<%= f.radio_button :stars, 2 %>
+		
+		<%= label :stars, "3", :value => 3%>
+		<%= f.radio_button :stars, 3 %>
+		
+		<%= label :stars, "4", :value => 4%>
+		<%= f.radio_button :stars, 4 %>
+		
+		<%= label :stars, "5", :value => 5%>
+		<%= f.radio_button :stars, 5 %>
+		
+		<br>
+		
+		<%= f.text_area :body %><br>
+		
+		<%= f.submit %>
+	</div>
+	<% end %>
+</div>

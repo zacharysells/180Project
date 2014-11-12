@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141109013136) do
+ActiveRecord::Schema.define(version: 20141112025323) do
 
   create_table "reservations", force: true do |t|
     t.integer  "hotel_id"
@@ -21,9 +21,22 @@ ActiveRecord::Schema.define(version: 20141109013136) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "hotel_name"
   end
 
   add_index "reservations", ["user_id"], name: "index_reservations_on_user_id"
+
+  create_table "reviews", force: true do |t|
+    t.integer  "hotel_id"
+    t.integer  "stars"
+    t.text     "body"
+    t.date     "review_date"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "reviews", ["user_id"], name: "index_reviews_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

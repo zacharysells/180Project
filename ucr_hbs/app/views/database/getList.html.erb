@@ -16,15 +16,15 @@
 				<p> Thumbnail: <img src= <%= @hotelList[i].thumbNailUrl %> alt="Mountain View" ></p>
 				<% if user_signed_in? %>
 				<%= link_to "Make a Reservation", controller: "reservations", action: "index", 
-				            :params => {:name      => @hotelList[i].name,
+				            :params => {:id        => @hotelList[i].hotelId,
+										:name      => @hotelList[i].name,
 								        :city      => @hotelList[i].city,
 										:price     => @hotelList[i].hotelPrice,
 										:rating    => @hotelList[i].hotelRating,
 										:arrival   => params[:start_date],
-										:departure => params[:departure]			
+										:departure => params[:departure]		
 							}, 
 							method: "post" %>
-
 				<% end %>
 			</div>
 	</div>
