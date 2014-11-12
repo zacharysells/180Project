@@ -15,14 +15,16 @@ class DatabaseController < ApplicationController
   
   def getHotelInfo()
 
-	  hotelId = params[:hotelId]
+	hotelId = params[:hotelId]
+	@arrivalDate = params[:arrivalDate]
+	@departureDate = params[:departureDate]
 
 	#construct http request
 	request = $gAPI_url + "/info?" \
 			+ "cid=" + $gCid \
 			+ "&apiKey=" + $gApiKey \
 			+ "&hotelId=" + hotelId \
-			+ "&options=" + "HOTEL_SUMMARY,PROPERTY_AMENITIES,HOTEL_IMAGES"
+			+ "&options=" + "HOTEL_DETAILS,HOTEL_SUMMARY,PROPERTY_AMENITIES,HOTEL_IMAGES"
 
 	response = JSON.parse(HTTParty.get(request).body)
 
@@ -34,13 +36,16 @@ class DatabaseController < ApplicationController
 
 			      #TODO: Figure out what to do if no results were found.
 		        #	   Currently sending them back to the homepage
-			      redirect_to root_url
+			      redirect_to '/database/errorPage'
 		      end
 
 	#We got a valid response. Parse the response and create a list of hotel objects
 	else
 		#Fill out hotel object with Hotel Summary
 		@hotel = Hotel.new(response["HotelInformationResponse"]["HotelSummary"])
+
+		#Fill out hotel object with Hotel Details(Long Description)
+		@hotel.longDescription = response["HotelInformationResponse"]["HotelDetails"]["propertyDescription"]
 
 		#Fill out hotel object with Hotel Amenities
 		hotelAmenitiesList = []
@@ -86,8 +91,11 @@ class DatabaseController < ApplicationController
 	stateProvinceCode = params[:state].gsub(' ', '+')
 	city = params[:city].gsub(' ', '+')
 
-	arrivalDate =  DateFormat(params[:start_date])
-	departureDate = DateFormat(params[:departure])
+	arrival =  DateFormat(params[:start_date])
+	departure = DateFormat(params[:departure])
+
+	@arrivalDate = params[:start_date]
+	@departureDate = params[:departure]
 
 	
 	#construct http request
@@ -99,8 +107,8 @@ class DatabaseController < ApplicationController
 			+ "&propertyName=" + propertyName \
 			+ "&stateProvinceCode=" + stateProvinceCode \
 			+ "&city=" + city \
-			+ "&arrivalDate=" + arrivalDate \
-			+ "&departureDate=" + departureDate
+			+ "&arrivalDate=" + arrival \
+			+ "&departureDate=" + departure
 
 
 	response = JSON.parse(HTTParty.get(request).body)
@@ -124,7 +132,7 @@ class DatabaseController < ApplicationController
 				#@destinationList << Destination.new(destinationInfo)
 			  #end
         
-			  redirect_to '/database/altList'
+			  redirect_to '/database/errorPage'
 
 
 		  #No results were returned
@@ -133,7 +141,7 @@ class DatabaseController < ApplicationController
 
 			    #TODO: Figure out what to do if no results were found.
 			    #	   Currently sending them back to the homepage
-			    redirect_to root_url
+			    redirect_to '/database/errorPage'
 		  end
 
 	#We got a valid response. Parse the response and create a list of hotel objects
@@ -146,6 +154,7 @@ class DatabaseController < ApplicationController
 		(0..(@hotelListSize)).each do |i|
 			hotelSummary = response["HotelListResponse"]["HotelList"]["HotelSummary"][i]
 			@hotelList << Hotel.new(hotelSummary)
+			@hotelList[i].thumbNailUrl = "http://images.travelnow.com" + response["HotelListResponse"]["HotelList"]["HotelSummary"][i]["thumbNailUrl"]
 	  end
 		
 	  end

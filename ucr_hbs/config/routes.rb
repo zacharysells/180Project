@@ -19,6 +19,8 @@ Rails.application.routes.draw do
 
   get 'database/altList'
   
+  get 'database/errorPage'
+  
   get 'database/reserve'
   post 'database/reserve'
   
@@ -33,6 +35,8 @@ Rails.application.routes.draw do
   
   resources :reviews
   post 'reviews/new'
+
+  post 'reservations/index'
 
   root 'welcome#index'
   
