@@ -23,16 +23,33 @@
 					<br />
 					<a href="#">
 						<img class="img-responsive" width="100" height="140" src=<%= @hotelList[i].thumbNailUrl %> alt="">
+						<br>
+						<% hotelStarLevel = Integer(@hotelList[i].hotelRating) %>
+
+						<% (1..(hotelStarLevel)).each do |i| %>
+							<img width="30" height="30" src="/assets/star_rating.png" alt="...">
+						<% end %>
+
+						<% (1..(5 - hotelStarLevel)).each do |i| %>
+							<img width="30" height="30" src="/assets/outlined-star-grey.png" alt="...">
+						<% end %>
 					</a>
 				</div>
 				<div class="col-md-7">
-				
-					<h3><%= raw @hotelList[i].name %><font size="4"> &nbsp; &nbsp; $<%= @hotelList[i].hotelPrice %></font> </h3>
+
+					<h3>
+						<%= raw @hotelList[i].name %>
+						<font size="4"> &nbsp; &nbsp; $<%= @hotelList[i].hotelPrice %></font> 
+					</h3>
 
 					<!-- Name / city / price / avg rate + stars / #of reviews / Thumbnail -->
-					<h4><strong><%= @hotelList[i].city %>, <%= @hotelList[i].stateProvinceCode %>
-					</strong> <font size="4"> &nbsp; &nbsp; Avg Rating: <%= @hotelList[i].hotelRating %> &nbsp; &nbsp; #of Reviews: NUMS </font></h4>
-					
+					<h4>
+						<strong> <%= @hotelList[i].city %> <%= @hotelList[i].stateProvinceCode %> </strong> 
+							<font size="4">
+								&nbsp; &nbsp; Rating: <%= @hotelList[i].hotelRating %> 
+								&nbsp; &nbsp; <%=Review.where(:hotel_id => @hotelList[i].hotelId).count %> Review(s)
+							</font>
+					</h4>
 					<% str = (@hotelList[i].shortDescription)%>
 					<!-- Gsub magic to get rid of embedded html -->
 					<% replacements = [ ["&lt;b&gt;Property", ""], ["Location&lt;/b&gt;", ""],["&lt;br /&gt;", ""], ["&lt;p/&gt;", ""], ["&lt;p&gt;", ""], ["&lt;/p&gt;", ""], ["&lt;b&gt;", ""], ["&lt;/b&gt;", ""] ]
