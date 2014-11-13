@@ -5,6 +5,8 @@ require 'Hotel'
 require 'Destination'
 
 class ReservationsController < ApplicationController
+  
+  before_action :authenticate_user!
 
   $id
   $name      
@@ -15,6 +17,12 @@ class ReservationsController < ApplicationController
   $departure  
   
   $cc_errors
+  
+  def require_login
+    if user_signed_in? == false
+      redirect_to
+    end
+  end
 
   def create
     @user = current_user
@@ -28,7 +36,7 @@ class ReservationsController < ApplicationController
   end
 
   def index
-    $id        = params[:id]
+    $id        = params[:hotelId]
     $name      = params[:name]
     $city      = params[:city]
     $arrival   = Date.new(params[:arrivalDate][:year].to_i, params[:arrivalDate][:month].to_i, params[:arrivalDate][:day].to_i)
