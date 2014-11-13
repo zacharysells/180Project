@@ -27,6 +27,8 @@ Rails.application.routes.draw do
   get'reservations/confirmation', to: 'reservations#confirmation'
   post'reservations/confirmation'
   
+  get 'reservations/reservationSummary'
+  
   get 'reservations/payment', to: 'reservations#payment'
   post 'reservations/payment'
   
