@@ -32,7 +32,7 @@ class ReservationsController < ApplicationController
                                              :departure_date => $departure,
                                              :rate => $rate
                                             )
-    redirect_to '/reservations/confirmation'
+    redirect_to '/reservations/reservationSummary'
   end
 
   def index

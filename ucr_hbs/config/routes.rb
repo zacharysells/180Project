@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   
   get 'database/getList', to: 'database#getList'
   post 'database/getList'
-  
 
   get 'database/hotelInfo'
   post 'database/getHotelInfo'
@@ -27,6 +26,8 @@ Rails.application.routes.draw do
   
   get'reservations/confirmation', to: 'reservations#confirmation'
   post'reservations/confirmation'
+  
+  get 'reservations/reservationSummary'
   
   get 'reservations/payment', to: 'reservations#payment'
   post 'reservations/payment'
