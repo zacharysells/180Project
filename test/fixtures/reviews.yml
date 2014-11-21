@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  hotel_id: 1
+  stars: 1
+  body: MyText
+  review_date: 2014-11-11
+  user_id: 
+
+two:
+  hotel_id: 1
+  stars: 1
+  body: MyText
+  review_date: 2014-11-11
+  user_id: 

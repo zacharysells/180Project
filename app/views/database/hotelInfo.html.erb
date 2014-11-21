@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title><%= raw @hotel.name %></title>
+
+	<style type="text/css">
+		h2{
+			margin: 0;     
+			color: #666;
+			padding-top: 90px;
+			font-size: 52px;
+			font-family: "trebuchet ms", sans-serif;    
+		}
+		.item{
+			background: #333;    
+			text-align: center;
+			height: 300px !important;
+		}
+		.carousel{
+			margin-top: 20px;
+		}
+		.bs-example{
+			margin: 20px;
+		}
+		.centeredImage
+		{
+			zoom: 2;  //increase if you have very small images
+
+			display: block;
+			margin: auto;
+
+			height: auto;
+			max-height: 100%;
+
+			width: auto;
+			max-width: 100%;
+		}
+	</style>
+
+</head>
+
+<body>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+
+            <!-- Blog Post Content Column -->
+            <div class="col-md-8">
+
+                <!-- Blog Post -->
+
+                <!-- Title -->
+                <h1><%= raw @hotel.name %> </h1>
+
+                <!-- Author -->
+                <p class="lead">
+                    <%= @hotel.city %> <%= @hotel.stateProvinceCode %>
+                </p>
+
+                <hr>
+
+				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+					  <!-- Indicators -->
+					  <ol class="carousel-indicators">
+						<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+						<% (1..(@hotel.hotelPictures.size - 1)).each do |i| %>
+							<li data-target="#carousel-example-generic" data-slide-to="<%=i%>"></li>
+						<% end %>
+					  </ol>
+					 
+					  <!-- Wrapper for slides -->
+					  <div class="carousel-inner">
+						<div class="item active">
+						  <img class="centeredImage" src=<%=@hotel.hotelPictures[0] %> alt="...">
+						</div>
+						
+						<% (1..(@hotel.hotelPictures.size - 1)).each do |i| %>
+					  
+							<div class="item">
+							  <img class="centeredImage" src=<%=@hotel.hotelPictures[i] %> alt="...">
+							</div>
+					  
+						<% end %>
+						
+						
+					  </div>
+					  
+					  
+					 
+					  <!-- Controls -->
+					  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+						<
+					  </a>
+					  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+						>
+					  </a>
+					</div> <!-- Carousel -->
+
+                <hr>
+
+                <!-- Post Content -->
+                <div style="width: 750px;height: 250px;overflow-x:scroll;overflow-y:auto;">
+					<% str = (@hotel.longDescription)%>
+					<!-- Gsub magic to get rid of embedded html -->
+					<% replacements = [ ["&lt;b&gt;Property", ""], ["Location&lt;/b&gt;", ""],["&lt;br /&gt;", ""], ["&lt;p/&gt;", ""], ["&lt;p&gt;", ""], ["&lt;/p&gt;", ""], ["&lt;b&gt;", ""], ["&lt;/b&gt;", ""] ]
+					replacements.each {|replacement| str.gsub!(replacement[0], replacement[1])} %>
+					<p class="lead"><%= raw str %></p>
+				</div>
+
+                <hr>
+
+
+
+                <!-- Posted Reviews -->
+
+                <!-- Review -->
+				<% Review.where(:hotel_id => @hotel.hotelId).each do |review| %>
+                <div class="media">
+                    <a class="pull-left" href="#">
+                        <img class="media-object" src="http://placehold.it/64x64" alt="">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading"> <%= review.user.email %>
+                            <small><%= review.created_at.to_formatted_s(:long_ordinal) %></small>
+                        </h4>
+                        <%= review.body %>
+                    </div>
+                </div>
+				<% end %>
+            </div>
+
+            <!-- Hotel Sidebar Widgets Column -->
+            <div class="col-md-3" align="middle">
+				<div class="well">
+					<%= button_to "Make Reservation", {controller: "reservations", action: "index", method: "post",
+								:params => {:hotelId => @hotel.hotelId,
+											:name => @hotel.name,
+											:city => @hotel.city,
+											:arrivalDate => @arrivalDate,
+											:departureDate => @departureDate,
+											:price => @hotel.hotelPrice
+											}}, {class: 'btn btn-primary'}%> 
+				</div>
+			</div>
+                <!-- Side WidgetWell -->
+            <div class="col-md-4">
+                <div class="well">
+                    <h4>Amenities</h4>
+                    <ul>
+						<% (0..(@hotel.hotelAmenities.size - 1)).each do |i| %>
+							<li><%= @hotel.hotelAmenities[i] %></li>
+						<% end %>
+                    </ul>
+
+
+            </div>
+
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+</body>
+
+</html>

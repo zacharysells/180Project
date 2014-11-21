@@ -1,0 +1,17 @@
+<h2>Reservation Summary</h2>
+<h2><small>Please confirm your reservation at </small><small style="color:turquoise"><%= raw $name %></small> 
+												<small> in </small>
+												<small style="color:turquoise"><%= $city %></small>
+												<small> from </small>
+												<br>
+												<small style="color:turquoise"><%= $arrival %></small>
+												<small> to </small>
+												<small style="color:turquoise"><%= $departure %></small></h2>
+
+<br>
+<h2> 	<small>A total of </small>
+		<small style="color:green">$<%= $price %></small>
+		<small>will be charged to your credit card</small>
+</h2>
+<br><br>
+<%= button_to "Make Reservation", {controller: "reservations", action: "create", method: "post"}, {class: 'btn btn-primary'}%> 
