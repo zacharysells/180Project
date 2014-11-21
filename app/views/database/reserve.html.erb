@@ -1,28 +1,24 @@
 <h1>Payment for your Reservation</h1>
-<body>November 14, 2014 - November 26, 2014<br>
-Holiday Inn, 2 guests <br>
-1234 Parkway Springs Dr, Land, CA 95201 <br>
 
-</body>
 
 <h3>Credit Card Information</h3>
 <div class="form-group">
-	Name on card <%= text_field_tag(:cardname, nil) %> 
+	Name on card <%= text_field_tag(:cardname, nil) %>
 	<br>
-	Credit card number <%= text_field_tag(:ccn, nil) %> 
+	Credit card number <%= text_field_tag(:ccn, nil) %>
 	<br>
-	CVC	<%= text_field_tag(:cvc, nil) %> 
+	CVC	<%= text_field_tag(:cvc, nil) %>
 	<br>
 	Expiration date (MM/DD/YYYY) <%= text_field_tag(:expdate, nil) %>
 	<br>
-	
+
 	<h3>Billing Address</h3>
 	<br>
-	Full name <%= text_field_tag(:biladdname, nil) %> 
+	Full name <%= text_field_tag(:biladdname, nil) %>
 	<br>
-	Address line 1 <%= text_field_tag(:add1, nil,placeholder:"Street address") %> 
+	Address line 1 <%= text_field_tag(:add1, nil,placeholder:"Street address") %>
 	<br>
-	Address line 2	<%= text_field_tag(:add2, nil,placeholder:"Apartment, suite, etc.") %> 
+	Address line 2	<%= text_field_tag(:add2, nil,placeholder:"Apartment, suite, etc.") %>
 	<br>
 	City <%= text_field_tag(:city, nil) %>
 	<br>
@@ -276,11 +272,9 @@ Holiday Inn, 2 guests <br>
 </select>
 
 	<br><br>
-	
-	
+
+
     <div class="form-actions">
 	<%= submit_tag("Confirm") %>
     </div>
 </div>
-
-

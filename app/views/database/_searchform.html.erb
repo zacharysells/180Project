@@ -1,12 +1,12 @@
 <div class="jumbotron">
-<%= form_tag :controller => 'database', :action => 'getList', :method => 'post' do %> 
+<%= form_tag :controller => 'database', :action => 'getList', :method => 'post' do %>
 <legend>Search for Hotels</legend>
 <div class="form-group">
-	<%= text_field_tag(:name, nil, placeholder: 'Name') %> 
-	<%= text_field_tag(:poi, nil, placeholder: 'Point of Interest') %> 
+	<%= text_field_tag(:name, nil, placeholder: 'Name') %>
+	<%= text_field_tag(:poi, nil, placeholder: 'Point of Interest') %>
 	</div>
 	<div class="form-group">
-		<%= text_field_tag(:city, nil, placeholder: 'City') %> 
+		<%= text_field_tag(:city, nil, placeholder: 'City') %>
 		<%= text_field_tag(:state, nil, placeholder: 'State/Province') %>
 	</div>
 	<div class="form-group">
