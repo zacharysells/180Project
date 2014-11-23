@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20141112025323) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "reservations", force: true do |t|
     t.integer  "hotel_id"
     t.date     "arrival_date"
@@ -24,7 +27,7 @@ ActiveRecord::Schema.define(version: 20141112025323) do
     t.string   "hotel_name"
   end
 
-  add_index "reservations", ["user_id"], name: "index_reservations_on_user_id"
+  add_index "reservations", ["user_id"], name: "index_reservations_on_user_id", using: :btree
 
   create_table "reviews", force: true do |t|
     t.integer  "hotel_id"
@@ -36,7 +39,7 @@ ActiveRecord::Schema.define(version: 20141112025323) do
     t.datetime "updated_at"
   end
 
-  add_index "reviews", ["user_id"], name: "index_reviews_on_user_id"
+  add_index "reviews", ["user_id"], name: "index_reviews_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -53,7 +56,7 @@ ActiveRecord::Schema.define(version: 20141112025323) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
