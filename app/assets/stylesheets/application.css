@@ -13,6 +13,8 @@
  *= require_tree .
  *= require_self
  */
-<html>
-<title>This is My Layout!</title>
-</html>
+
+#banner-top{
+    top: 40px;
+    left: 40px;
+}
