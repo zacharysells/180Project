@@ -5,6 +5,14 @@
  */
 
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
+
+.highlight {
+    padding: 9px 14px;
+    margin-bottom: 14px;
+    background-color: #EAEAEA;
+    border: 2px solid #7D9EC0;
+    border-radius: 4px;
+}
 html {
   font-family: sans-serif;
   -webkit-text-size-adjust: 100%;
@@ -2939,10 +2947,29 @@ fieldset[disabled] .btn-primary.active {
     text-shadow: 0 1px 1px rgba(255, 255, 255, 0.82);
     -webkit-font-smoothing: antialiased;
 }
-.btn-success {
+
+.btn-sort {
+
+}
+.btn-sort{
   color: #fff;
-  background-color: #5cb85c;
+  background-color: #AAAAAA;
   border-color: #4cae4c;
+}
+.btn-sort:hover,
+.btn-sort:focus,
+.btn-sort.focus,
+.btn-sort:active,
+.btn-sort.active,
+.open > .dropdown-toggle.btn-sort {
+    color: #fff;
+    background-color: #7D9EC0;
+    border-color: #398439;
+}
+.btn-sort:active,
+.btn-sort.active,
+.open > .dropdown-toggle.btn-sort {
+    background-image: none;
 }
 .btn-success:hover,
 .btn-success:focus,

@@ -1,16 +1,28 @@
- <!-- Page Heading -->
-        <div class="row">
+
+    <div class="row">
             <div class="col-lg-8">
 
                 <h1>Search Results</h1>
 
+                <h5>Sort by:
+
+                <span class="btn-group" data-toggle="buttons-radio">
+                    <button type="button" data-toggle="button" class="btn btn-sort btn-sm " name="sort" value="PRICE">Price</button>
+                    <button type="button" data-toggle="button" class="btn btn-sort btn-sm " name="sort" value="PROXIMITY">Distance</button>
+                    <button type="button" data-toggle="button"  class="btn btn-sort btn-sm " name="sort" value="QUALITY">star rating</button>
+
+                </span>
+                </h5>
             </div>
+
         </div>
-<body>
+
     <!-- Page Content -->
     <div class="container">
 
+
         <% (0..(@hotelListSize)).each do |i| %>
+        <div class="highlight">
 			 <!-- /.row -->
 			<div class="row">
 
@@ -22,11 +34,11 @@
 						<% hotelStarLevel = Integer(@hotelList[i].hotelRating) %>
 
 						<% (1..(hotelStarLevel)).each do |i| %>
-							<img width="30" height="30" src="/assets/star_rating.png" alt="...">
+							<img width="20" height="20" src="/assets/star_rating.png" alt="...">
 						<% end %>
 
 						<% (1..(5 - hotelStarLevel)).each do |i| %>
-							<img width="30" height="30" src="/assets/outlined-star-grey.png" alt="...">
+							<img width="20" height="20" src="/assets/outlined-star-grey.png" alt="...">
 						<% end %>
 					</a>
 				</div>
@@ -68,16 +80,13 @@
 										}}, {class: 'btn btn-custom'} %>
 					<br /><br />
 				</div>
-				<hr><hr>
-            <!-- /.row -->
-			</div>
 
-			<hr>
-			<hr>
+            <!-- /.row -->
+
+            </div>
+        </div>
+            <hr />
         <% end %>
+
         <!-- /.row -->
     </div>
-
-</body>
-
-</html>
