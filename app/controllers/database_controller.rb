@@ -12,7 +12,7 @@ $gERROR_CATEGORY_RESULT_NULL = "RESULT_NULL"
 $gERROR_CATEGORY_DATA_VALIDATION = "DATA_VALIDATION"
 
 class DatabaseController < ApplicationController
-  
+
   def getHotelInfo()
 
 	hotelId = params[:hotelId]
@@ -97,7 +97,7 @@ class DatabaseController < ApplicationController
 	@arrivalDate = params[:start_date]
 	@departureDate = params[:departure]
 
-	
+
 	#construct http request
 	request = $gAPI_url + "/list?" \
 			+ "cid=" + $gCid \
@@ -113,25 +113,25 @@ class DatabaseController < ApplicationController
 
 	response = JSON.parse(HTTParty.get(request).body)
 	puts request
-	
+
 	# Check for EanWsError
 	if response["HotelListResponse"]["EanWsError"] then
 		  hotelError = response["HotelListResponse"]["EanWsError"]
-		
+
 		  #Multiple possible destination error.
 	    if hotelError["category"] == $gERROR_CATEGORY_DATA_VALIDATION then
 			  #create list of suggested destinations
-			
+
 
 			  #We are not yet implementing the suggestions list functionality.
 			  #@destinationList = []
-			  #@destinationListSize = Integer(response["HotelListResponse"]["LocationInfos"]["@size"]) -1 
-        
+			  #@destinationListSize = Integer(response["HotelListResponse"]["LocationInfos"]["@size"]) -1
+
 			  #(0..(@destinationListSize)).each do |i|
 				#destinationInfo = response["HotelListResponse"]["LocationInfos"]["LocationInfo"][i]
 				#@destinationList << Destination.new(destinationInfo)
 			  #end
-        
+
 			  redirect_to '/database/errorPage'
 
 
@@ -145,19 +145,18 @@ class DatabaseController < ApplicationController
 		  end
 
 	#We got a valid response. Parse the response and create a list of hotel objects
-	else 
-	
+	else
+
 		#Our hotelListSize is subtracted by 1 because we only want up to last index
 		@hotelList = []
-		@hotelListSize = Integer(response["HotelListResponse"]["HotelList"]["@size"]) -1 
-					
+		@hotelListSize = Integer(response["HotelListResponse"]["HotelList"]["@size"]) -1
+
 		(0..(@hotelListSize)).each do |i|
 			hotelSummary = response["HotelListResponse"]["HotelList"]["HotelSummary"][i]
 			@hotelList << Hotel.new(hotelSummary)
 			@hotelList[i].thumbNailUrl = "http://images.travelnow.com" + response["HotelListResponse"]["HotelList"]["HotelSummary"][i]["thumbNailUrl"]
 	  end
-		
+
 	  end
   end
 end
-

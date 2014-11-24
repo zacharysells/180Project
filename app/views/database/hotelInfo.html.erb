@@ -2,12 +2,11 @@
     <title><%= raw @hotel.name %></title>
 
 	<style type="text/css">
-		h2{
-			margin: 0;
-			color: #666;
-			padding-top: 90px;
-			font-size: 52px;
-			font-family: "trebuchet ms", sans-serif;
+		p {
+            margin: 0;
+            color: #666;
+            padding-top: 40px;
+            font-family: "trebuchet ms", sans-serif;
 		}
 		.item{
 			background: #333;
@@ -58,9 +57,9 @@
 				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 					  <!-- Indicators -->
 					  <ol class="carousel-indicators">
-						<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+						<li data-target="#" data-slide-to="0" class="active"></li>
 						<% (1..(@hotel.hotelPictures.size - 1)).each do |i| %>
-							<li data-target="#carousel-example-generic" data-slide-to="<%=i%>"></li>
+							<li data-target="#" data-slide-to="<%=i%>"></li>
 						<% end %>
 					  </ol>
 
@@ -95,19 +94,19 @@
                 <hr>
 
                 <!-- Post Content -->
-                <div style="width: 750px;height: 250px;overflow-x:scroll;overflow-y:auto;">
-					<% str = (@hotel.longDescription)%>
+                <div style="width: 750px;height: 450px;overflow-x:auto;overflow-y:auto;">
+                    <% str = (@hotel.longDescription)%>
 					<!-- Gsub magic to get rid of embedded html -->
 					<% replacements = [ ["&lt;b&gt;Property", ""], ["Location&lt;/b&gt;", ""],["&lt;br /&gt;", ""], ["&lt;p/&gt;", ""], ["&lt;p&gt;", ""], ["&lt;/p&gt;", ""], ["&lt;b&gt;", ""], ["&lt;/b&gt;", ""] ]
 					replacements.each {|replacement| str.gsub!(replacement[0], replacement[1])} %>
-					<p class="lead"><%= raw str %></p>
+                    <div class="lead" style="font-size: 17px;"><%= raw str %></div>
 				</div>
 
-                <hr>
+                <hr />
 
 
 
-                <!-- Posted Reviews -->
+
 
                 <!-- Review -->
 				<% Review.where(:hotel_id => @hotel.hotelId).each do |review| %>
@@ -126,7 +125,7 @@
             </div>
 
             <!-- Hotel Sidebar Widgets Column -->
-            <div class="col-md-3" align="middle">
+            <div class="col-md-4" align="middle">
 				<div class="well">
 					<%= button_to "Make Reservation", {controller: "reservations", action: "index", method: "post",
 								:params => {:hotelId => @hotel.hotelId,
@@ -135,7 +134,7 @@
 											:arrivalDate => @arrivalDate,
 											:departureDate => @departureDate,
 											:price => @hotel.hotelPrice
-											}}, {class: 'btn btn-primary'}%>
+											}}, {class: 'btn btn-custom'}%>
 				</div>
 			</div>
                 <!-- Side WidgetWell -->
@@ -153,5 +152,3 @@
 
         </div>
         <!-- /.row -->
-
-        <hr>
