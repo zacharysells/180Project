@@ -2933,7 +2933,7 @@ fieldset[disabled] .btn-primary.active {
   background-color: #fff;
 }
 .btn-custom {
-    background-color: hsl(215, 82%, 50%) !important;
+    background-color: hsl(215, 80%, 60%) !important;
     background-repeat: repeat-x;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#fffffe", endColorstr="#166ee8");
     background-image: -khtml-gradient(linear, left top, left bottom, from(#fffffe), to(#166ee8));
@@ -2943,8 +2943,9 @@ fieldset[disabled] .btn-primary.active {
     background-image: -webkit-linear-gradient(top, #fffffe, #166ee8);
     background-image: -o-linear-gradient(top, #fffffe, #166ee8);
     background-image: linear-gradient(#fffffe, #166ee8);
-    border-color: #166ee8 #166ee8 hsl(215, 82%, 37.5%); color: #333 !important;
-    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.82);
+    border-color: #166ee8 #166ee8 hsl(215, 82%, 37.5%);
+    color: white !important;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.82);
     -webkit-font-smoothing: antialiased;
 }
 
