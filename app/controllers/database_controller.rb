@@ -1,4 +1,3 @@
-
 require 'Hotel'
 require 'Destination'
 
@@ -34,10 +33,13 @@ class DatabaseController < ApplicationController
 		     #No results were returned
 		     if hotelError["category"] == $gERROR_CATEGORY_RESULT_NULL then
 
-			      #TODO: Figure out what to do if no results were found.
-		        #	   Currently sending them back to the homepage
-			      redirect_to '/database/errorPage'
-		      end
+				 #TODO: Figure out what to do if no results were found.
+		         #	     Currently sending them to error page
+			     redirect_to '/database/errorPage'
+		     
+		     else
+				 redirect_to '/database/errorPage'
+		     end
 
 	#We got a valid response. Parse the response and create a list of hotel objects
 	else
@@ -116,33 +118,36 @@ class DatabaseController < ApplicationController
 	
 	# Check for EanWsError
 	if response["HotelListResponse"]["EanWsError"] then
-		  hotelError = response["HotelListResponse"]["EanWsError"]
+		hotelError = response["HotelListResponse"]["EanWsError"]
 		
-		  #Multiple possible destination error.
+		#Multiple possible destination error.
 	    if hotelError["category"] == $gERROR_CATEGORY_DATA_VALIDATION then
-			  #create list of suggested destinations
+			#create list of suggested destinations
+		
+
+			#We are not yet implementing the suggestions list functionality.
+			#@destinationList = []
+			#@destinationListSize = Integer(response["HotelListResponse"]["LocationInfos"]["@size"]) -1 
+		
+			#(0..(@destinationListSize)).each do |i|
+			#destinationInfo = response["HotelListResponse"]["LocationInfos"]["LocationInfo"][i]
+			#@destinationList << Destination.new(destinationInfo)
+			#end
+
+			redirect_to '/database/errorPage'
+
+		#No results were returned
+		elsif hotelError["category"] == $gERROR_CATEGORY_RESULT_NULL then
+			#TODO: Figure out what to do if no results were found.
+			#	   Currently sending them to error page
+			redirect_to '/database/errorPage'
 			
-
-			  #We are not yet implementing the suggestions list functionality.
-			  #@destinationList = []
-			  #@destinationListSize = Integer(response["HotelListResponse"]["LocationInfos"]["@size"]) -1 
-        
-			  #(0..(@destinationListSize)).each do |i|
-				#destinationInfo = response["HotelListResponse"]["LocationInfos"]["LocationInfo"][i]
-				#@destinationList << Destination.new(destinationInfo)
-			  #end
-        
-			  redirect_to '/database/errorPage'
-
-
-		  #No results were returned
-		  elsif hotelError["category"] == $gERROR_CATEGORY_RESULT_NULL then
-
-
-			    #TODO: Figure out what to do if no results were found.
-			    #	   Currently sending them back to the homepage
-			    redirect_to '/database/errorPage'
-		  end
+		else
+			#TODO: Figure out what to do if no results were found.
+			#	   Currently sending them to error page
+			redirect_to '/database/errorPage'
+			
+		end
 
 	#We got a valid response. Parse the response and create a list of hotel objects
 	else 
