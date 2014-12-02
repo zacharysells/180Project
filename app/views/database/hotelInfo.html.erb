@@ -13,14 +13,14 @@
 
 	<style type="text/css">
 		h2{
-			margin: 0;     
+			margin: 0;
 			color: #666;
 			padding-top: 90px;
 			font-size: 52px;
-			font-family: "trebuchet ms", sans-serif;    
+			font-family: "trebuchet ms", sans-serif;
 		}
 		.item{
-			background: #333;    
+			background: #333;
 			text-align: center;
 			height: 300px !important;
 		}
@@ -77,26 +77,26 @@
 							<li data-target="#carousel-example-generic" data-slide-to="<%=i%>"></li>
 						<% end %>
 					  </ol>
-					 
+
 					  <!-- Wrapper for slides -->
 					  <div class="carousel-inner">
 						<div class="item active">
 						  <img class="centeredImage" src=<%=@hotel.hotelPictures[0] %> alt="...">
 						</div>
-						
+
 						<% (1..(@hotel.hotelPictures.size - 1)).each do |i| %>
-					  
+
 							<div class="item">
 							  <img class="centeredImage" src=<%=@hotel.hotelPictures[i] %> alt="...">
 							</div>
-					  
+
 						<% end %>
-						
-						
+
+
 					  </div>
-					  
-					  
-					 
+
+
+
 					  <!-- Controls -->
 					  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
 						<
@@ -110,14 +110,21 @@
 
                 <!-- Post Content -->
                 <div style="width: 750px;height: 250px;overflow-x:scroll;overflow-y:auto;">
-					<% str = (@hotel.longDescription)%>
-					<!-- Gsub magic to get rid of embedded html -->
-					<% replacements = [ ["&lt;b&gt;Property", ""], ["Location&lt;/b&gt;", ""],["&lt;br /&gt;", ""], ["&lt;p/&gt;", ""], ["&lt;p&gt;", ""], ["&lt;/p&gt;", ""], ["&lt;b&gt;", ""], ["&lt;/b&gt;", ""] ]
-					replacements.each {|replacement| str.gsub!(replacement[0], replacement[1])} %>
-					<p class="lead"><%= raw str %></p>
-				</div>
+        					<% str = (@hotel.longDescription)%>
+        					<!-- Gsub magic to get rid of embedded html -->
+        					<% replacements = [ ["&lt;b&gt;Property", ""], ["Location&lt;/b&gt;", ""],["&lt;br /&gt;", ""], ["&lt;p/&gt;", ""], ["&lt;p&gt;", ""], ["&lt;/p&gt;", ""], ["&lt;b&gt;", ""], ["&lt;/b&gt;", ""] ]
+        					replacements.each {|replacement| str.gsub!(replacement[0], replacement[1])} %>
+        					<p class="lead"><%= raw str %></p>
+				        </div>
 
                 <hr>
+
+                <iframe
+                  width="600"
+                  height="450"
+                  frameborder="0" style="border:0"
+                  src="<%= @mapURL %>">
+                </iframe>
 
 
 
@@ -149,7 +156,7 @@
 											:arrivalDate => @arrivalDate,
 											:departureDate => @departureDate,
 											:price => @hotel.hotelPrice
-											}}, {class: 'btn btn-primary'}%> 
+											}}, {class: 'btn btn-primary'}%>
 				</div>
 			</div>
                 <!-- Side WidgetWell -->
@@ -166,7 +173,6 @@
             </div>
 
         </div>
-        <!-- /.row -->
 
         <hr>
 

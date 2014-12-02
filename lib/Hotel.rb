@@ -3,12 +3,14 @@ $gHotelName = "name"
 $gHotelShortDescription = "shortDescription"
 $gHotelCity = "city"
 $gHotelState = "stateProvinceCode"
+$gHotelLatitude = "latitude"
+$gHotelLongitude = "longitude"
 $gHotelRating = "hotelRating"
 
 $gHotelHighRate = "highRate"
 $gHotelLowRate = "lowRate"
 
-$HotelAmenityMask = "amenityMask"
+$gHotelAmenityMask = "amenityMask"
 
 $gHotelThumbnail = "thumbNailUrl"
 
@@ -18,6 +20,8 @@ class Hotel
 	attr_accessor :name
 	attr_accessor :city
 	attr_accessor :stateProvinceCode
+	attr_accessor :latitude
+	attr_accessor :longitude
 	attr_accessor :shortDescription
 	attr_accessor :longDescription
 	attr_accessor :hotelRating
@@ -35,10 +39,12 @@ class Hotel
 		@name = hotelSummary[$gHotelName]
 		@city = hotelSummary[$gHotelCity]
 		@stateProvinceCode = hotelSummary[$gHotelState]
+		@latitude = hotelSummary[$gHotelLatitude]
+		@longitude = hotelSummary[$gHotelLongitude]
 		@shortDescription = hotelSummary[$gHotelShortDescription]
 		@hotelRating = hotelSummary[$gHotelRating]
 		@hotelPrice = hotelSummary[$gHotelHighRate]
-		@amenityMask = hotelSummary[$HotelAmenityMask]
+		@amenityMask = hotelSummary[$gHotelAmenityMask]
 		if (hotelSummary[$gHotelThumbnail])
 			@thumbNailUrl = "http://images.travelnow.com" + hotelSummary[$gHotelThumbnail]
 
