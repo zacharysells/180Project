@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get 'database/getList', to: 'database#getList'
   post 'database/getList'
 
-  get 'database/hotelInfo'
+  get 'database/getHotelInfo'
   post 'database/getHotelInfo'
 
   get 'database/altList'
@@ -23,13 +23,14 @@ Rails.application.routes.draw do
   get 'database/reserve'
   post 'database/reserve'
   
+  post 'reservations/fill_default_info'
   
   get'reservations/confirmation', to: 'reservations#confirmation'
   post'reservations/confirmation'
   
   get 'reservations/reservationSummary'
   
-  get 'reservations/payment', to: 'reservations#payment'
+  get 'reservations/payment' #, to: 'reservations#payment'
   post 'reservations/payment'
   
   post 'reservations/validate_credit_card'
@@ -41,8 +42,15 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
   
+  get 'welcome/payment_info'
+  
+  post 'payment_info/set_default_payment_info'
+  
+  post 'payment_info/edit'
+  
   resource :user do
     resources :reservations
+    resources :payment_info
   end
 
   

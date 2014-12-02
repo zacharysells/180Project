@@ -1,0 +1,14 @@
+<% if $cc_errors == true %>
+<span class="label label-danger">Invalid Credit Card Information</span>
+<% end %>
+
+<h1>Default Payment Information</h1>
+
+<%= form_tag :controller => 'payment_info',  :action => (current_user.payment_info.blank? ? 'create' : 'edit'), :method => 'post' do %>
+
+<div class="jumbotron">
+
+<%= render file: (current_user.payment_info.blank? ? '/reservations/_creditcard' : '/reservations/_defaultcreditcard') %>
+
+</div>
+<% end %>
