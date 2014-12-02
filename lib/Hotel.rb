@@ -8,6 +8,8 @@ $gHotelRating = "hotelRating"
 $gHotelHighRate = "highRate"
 $gHotelLowRate = "lowRate"
 
+$HotelAmenityMask = "amenityMask"
+
 $gHotelThumbnail = "thumbNailUrl"
 
 class Hotel
@@ -20,21 +22,30 @@ class Hotel
 	attr_accessor :longDescription
 	attr_accessor :hotelRating
 	attr_accessor :hotelPrice
+	attr_accessor :amenityMask
 	attr_accessor :hotelAmenities
 	attr_accessor :hotelPictures
 	attr_accessor :thumbNailUrl
-	
+
 	def initialize(hotelSummary)
-		
+
 		#Information about hotel
-		
+
 		@hotelId = hotelSummary[$gHotelId]
 		@name = hotelSummary[$gHotelName]
 		@city = hotelSummary[$gHotelCity]
 		@stateProvinceCode = hotelSummary[$gHotelState]
-		@shortDescription = hotelSummary[$gHotelShortDescription] 
+		@shortDescription = hotelSummary[$gHotelShortDescription]
 		@hotelRating = hotelSummary[$gHotelRating]
 		@hotelPrice = hotelSummary[$gHotelHighRate]
-	
+		@amenityMask = hotelSummary[$HotelAmenityMask]
+		if (hotelSummary[$gHotelThumbnail])
+			@thumbNailUrl = "http://images.travelnow.com" + hotelSummary[$gHotelThumbnail]
+
+		else
+			@thumbNailUrl = ""
+
+		end
+
 	end
 end

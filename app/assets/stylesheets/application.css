@@ -12,7 +12,35 @@
  *
  *= require_tree .
  *= require_self
+ *= require bootstrap-slider
  */
+ 
+#star_rating_slider_style .slider-selection
+{
+	background: #8283FF;
+}
+
+#star_rating_slider_style .slider-handle
+{
+	background: blue;
+}
+	
+#price_slider_style .slider-selection
+{
+	background: #428041;
+}
+
+#price_slider_style .slider-handle 
+{
+	background: green;
+}
+
+ul.dropdown-menu-form {
+    padding: 5px 25px 0;
+    max-height: 500px;
+    overflow-y: scroll;
+}
+ 
 <html>
 <title>This is My Layout!</title>
 </html>

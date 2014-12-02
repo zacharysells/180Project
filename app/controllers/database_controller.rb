@@ -4,14 +4,14 @@ require 'Destination'
 $gAPI_url = "http://dev.api.ean.com/ean-services/rs/hotel/v3"
 $gCid = "55505"
 $gApiKey = "vbcytyyspe2t9c64rv5vxmep"
-$gNumberOfResults = "7"
+$gNumberOfResults = "20"
 
 
 $gERROR_CATEGORY_RESULT_NULL = "RESULT_NULL"
 $gERROR_CATEGORY_DATA_VALIDATION = "DATA_VALIDATION"
 
 class DatabaseController < ApplicationController
-  
+
   def getHotelInfo()
 
 	hotelId = params[:hotelId]
@@ -36,12 +36,12 @@ class DatabaseController < ApplicationController
 				 #TODO: Figure out what to do if no results were found.
 		         #	     Currently sending them to error page
 			     redirect_to '/database/errorPage'
-		     
+
 		     else
 				 redirect_to '/database/errorPage'
 		     end
 
-	#We got a valid response. Parse the response and create a list of hotel objects
+	#We got a valid response. Parse the response and create a detailed hotel Object
 	else
 		#Fill out hotel object with Hotel Summary
 		@hotel = Hotel.new(response["HotelInformationResponse"]["HotelSummary"])
@@ -99,7 +99,19 @@ class DatabaseController < ApplicationController
 	@arrivalDate = params[:start_date]
 	@departureDate = params[:departure]
 
-	
+
+	priceRange = params[:priceRange]
+	starRange = params[:starRange]
+
+	minStarRating = starRange.split(',')[0]
+	maxStarRating = starRange.split(',')[1]
+
+	minRate = priceRange.split(',')[0]
+	maxRate = priceRange.split(',')[1]
+
+  amenities = params[:amenities]
+
+
 	#construct http request
 	request = $gAPI_url + "/list?" \
 			+ "cid=" + $gCid \
@@ -109,60 +121,87 @@ class DatabaseController < ApplicationController
 			+ "&propertyName=" + propertyName \
 			+ "&stateProvinceCode=" + stateProvinceCode \
 			+ "&city=" + city \
+			+ "&minStarRating=" + minStarRating \
+			+ "&maxStarRating=" + maxStarRating \
+			+ "&minRate=" + minRate \
+			+ "&maxRate=" + maxRate \
 			+ "&arrivalDate=" + arrival \
 			+ "&departureDate=" + departure
 
 
-	response = JSON.parse(HTTParty.get(request).body)
-	puts request
-	
+	response = JSON.parse(HTTParty.get(request).body)["HotelListResponse"]
+  @hotelList = []
+  puts request
+
 	# Check for EanWsError
-	if response["HotelListResponse"]["EanWsError"] then
-		hotelError = response["HotelListResponse"]["EanWsError"]
-		
+	if response["EanWsError"] then
+		hotelError = response["EanWsError"]
+
 		#Multiple possible destination error.
 	    if hotelError["category"] == $gERROR_CATEGORY_DATA_VALIDATION then
 			#create list of suggested destinations
-		
+
 
 			#We are not yet implementing the suggestions list functionality.
 			#@destinationList = []
-			#@destinationListSize = Integer(response["HotelListResponse"]["LocationInfos"]["@size"]) -1 
-		
+			#@destinationListSize = Integer(response["HotelListResponse"]["LocationInfos"]["@size"]) -1
+
 			#(0..(@destinationListSize)).each do |i|
 			#destinationInfo = response["HotelListResponse"]["LocationInfos"]["LocationInfo"][i]
 			#@destinationList << Destination.new(destinationInfo)
 			#end
 
 			redirect_to '/database/errorPage'
+      return
 
 		#No results were returned
 		elsif hotelError["category"] == $gERROR_CATEGORY_RESULT_NULL then
 			#TODO: Figure out what to do if no results were found.
 			#	   Currently sending them to error page
 			redirect_to '/database/errorPage'
-			
+      return
+
 		else
 			#TODO: Figure out what to do if no results were found.
 			#	   Currently sending them to error page
 			redirect_to '/database/errorPage'
-			
+      return
+
 		end
 
-	#We got a valid response. Parse the response and create a list of hotel objects
-	else 
-	
-		#Our hotelListSize is subtracted by 1 because we only want up to last index
-		@hotelList = []
-		@hotelListSize = Integer(response["HotelListResponse"]["HotelList"]["@size"]) -1 
-					
-		(0..(@hotelListSize)).each do |i|
-			hotelSummary = response["HotelListResponse"]["HotelList"]["HotelSummary"][i]
-			@hotelList << Hotel.new(hotelSummary)
-			@hotelList[i].thumbNailUrl = "http://images.travelnow.com" + response["HotelListResponse"]["HotelList"]["HotelSummary"][i]["thumbNailUrl"]
+	#We got a valid response. Parse the response and create a list of hotel objects.
+	else
+
+    # Create amenity mask to filter hotels.
+    if amenities == nil
+      amenitiesMask = 0
+    else
+      amenitiesMask = 0
+      amenities.each do |amenity|
+        amenitiesMask = amenitiesMask | amenity.to_i
+      end
+    end
+
+    # Special case for hotel list of size 1.
+		if (@hotelList.size == 1)
+			hotelSummary = response['HotelList']['HotelSummary']
+      if (hotelSummary["amenityMask"].to_i & amenitiesMask == amenitiesMask)
+        @hotelList << Hotel.new(hotelSummary)
+      end
+		else
+			response['HotelList']['HotelSummary'].each do |hotelSummary|
+        # If hotel has amenity in filter, add it to hotel list.
+        if (hotelSummary["amenityMask"].to_i & amenitiesMask == amenitiesMask)
+  			  @hotelList << Hotel.new(hotelSummary)
+        end
+			end
+		end
+
 	  end
-		
-	  end
+    # If no hotels pass through the filter, redirect to error page.
+    if @hotelList.size == 0
+      redirect_to '/database/errorPage'
+      return
+    end
   end
 end
-
