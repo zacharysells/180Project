@@ -182,8 +182,9 @@ class DatabaseController < ApplicationController
       end
     end
 
+    @hotelListSize = Integer(response["HotelList"]["@size"])
     # Special case for hotel list of size 1.
-		if (@hotelList.size == 1)
+		if (@hotelListSize == 1)
 			hotelSummary = response['HotelList']['HotelSummary']
       if (hotelSummary["amenityMask"].to_i & amenitiesMask == amenitiesMask)
         @hotelList << Hotel.new(hotelSummary)
