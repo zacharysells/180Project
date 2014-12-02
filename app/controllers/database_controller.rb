@@ -6,8 +6,8 @@ $gCid = "55505"
 $gApiKey = "vbcytyyspe2t9c64rv5vxmep"
 $gNumberOfResults = "20"
 
-$gGoogleMapAPIURL = "https://www.google.com/maps/embed/v1"
-$gGoogleMapAPIKey = "AIzaSyBM18RM2LnqNgLTDC7AMBuSbkHyPI1EgfE"
+#$gGoogleMapAPIURL = "https://www.google.com/maps/embed/v1"
+#$gGoogleMapAPIKey = "AIzaSyBM18RM2LnqNgLTDC7AMBuSbkHyPI1EgfE"
 
 $gERROR_CATEGORY_RESULT_NULL = "RESULT_NULL"
 $gERROR_CATEGORY_DATA_VALIDATION = "DATA_VALIDATION"
@@ -71,9 +71,9 @@ class DatabaseController < ApplicationController
 		end
 		@hotel.hotelPictures = hotelPicturesList
 
-    @mapURL = $gGoogleMapAPIURL + "/search?" \
-        + "key=" + $gGoogleMapAPIKey \
-        + "&q=" + (@hotel.latitude).to_s + "," + (@hotel.longitude).to_s
+    #@mapURL = $gGoogleMapAPIURL + "/search?" \
+        #+ "key=" + $gGoogleMapAPIKey \
+        #+ "&q=" + (@hotel.latitude).to_s + "," + (@hotel.longitude).to_s
 
 		render '/database/hotelInfo'
 
