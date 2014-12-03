@@ -1,8 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
- <!-- Page Heading -->
         <div class="row">
             <div class="col-lg-8">
                 <h1>Search Results</h1>
@@ -23,12 +19,12 @@
                 </h5>
             </div>
         </div>
-</head>
-<body>
+
     <!-- Page Content -->
     <div class="container">
 
       <% (0..(@hotelList.size - 1)).each do |i| %>
+        <div class="highlight">
 			 <!-- /.row -->
 			<div class="row">
 
@@ -86,16 +82,12 @@
 										}}, {class: 'btn btn-primary'} %>
 					<br /><br />
 				</div>
-				<hr><hr>
+
             <!-- /.row -->
 			</div>
 
-			<hr>
-			<hr>
+            <hr />
+        </div>
         <% end %>
         <!-- /.row -->
     </div>
-
-</body>
-
-</html>
