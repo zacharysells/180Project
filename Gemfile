@@ -25,7 +25,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
 
-  
+
 #<<<<<<< Local Changes
 #<<<<<<< Local Changes
 #<<<<<<< Local Changes
@@ -33,15 +33,15 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 #=======
   gem 'activemerchant'
 
-  gem 'therubyracer', '~> 0.10.2'
+  gem 'therubyracer', '~> 0.12.1'
   gem 'less-rails'
   gem 'twitter-bootstrap-rails', '~> 3.2.0'
-  
+  gem 'bootstrap-slider-rails'
   gem 'devise'
-  
+
   gem 'httparty' #For http requests and processing json responses
 #>>>>>>> External Changes
-  
+
 
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
