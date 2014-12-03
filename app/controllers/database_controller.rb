@@ -6,7 +6,7 @@ $gAPI_url = "http://dev.api.ean.com/ean-services/rs/hotel/v3"
 $gCid = "55505"
 $gApiKey = "vbcytyyspe2t9c64rv5vxmep"
 $gNumberOfResults = "7"
-$sort = "CITY_VALUE"
+
 
 $gERROR_CATEGORY_RESULT_NULL = "RESULT_NULL"
 $gERROR_CATEGORY_DATA_VALIDATION = "DATA_VALIDATION"

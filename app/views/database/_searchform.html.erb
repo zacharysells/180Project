@@ -18,6 +18,22 @@
 		<%= label_tag(:departure, "Departure Date") %>
 		<%= select_date Date.today+1, prefix: :departure %>
 	</div>
+
+	<div class="row">
+		<div class="col-lg-8">
+			<h5>Sort by:
+				<p>price
+				<%= radio_button_tag 'sort', "PRICE", false %>
+				rating
+				<%= radio_button_tag 'sort', "QUALITY", false %>
+				distance
+				<%= radio_button_tag 'sort', "PROXIMITY", true %>
+			</p>
+			</h5>
+		</div>
+
+	</div>
+
     <div class="form-actions">
 	<%= submit_tag("Search") %>
     </div>
