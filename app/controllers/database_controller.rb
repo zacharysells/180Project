@@ -93,27 +93,28 @@ class DatabaseController < ApplicationController
   def getList()
 
 	#search parameters
-
-	destinationString = params[:poi].gsub(' ', '+')
-	propertyName = params[:name].gsub(' ', '+')
-	stateProvinceCode = params[:state].gsub(' ', '+')
-	city = params[:city].gsub(' ', '+')
+  @sort = ['PRICE', 'QUALITY', 'PROXIMITY'].find{|s| s == params[:sort]}
+  @sort ||= 'CITY_VALUE' #sort by default
+	@destinationString = params[:poi].gsub(' ', '+')
+	@propertyName = params[:name].gsub(' ', '+')
+	@stateProvinceCode = params[:state].gsub(' ', '+')
+	@city = params[:city].gsub(' ', '+')
 
 	arrival =  DateFormat(params[:start_date])
 	departure = DateFormat(params[:departure])
 
-	@arrivalDate = params[:start_date]
-	@departureDate = params[:departure]
+	$arrivalDate = params[:start_date]
+	$departureDate = params[:departure]
 
 
-	priceRange = params[:priceRange]
-	starRange = params[:starRange]
+	@priceRange = params[:priceRange]
+	@starRange = params[:starRange]
 
-	minStarRating = starRange.split(',')[0]
-	maxStarRating = starRange.split(',')[1]
+	minStarRating = @starRange.split(',')[0]
+	maxStarRating = @starRange.split(',')[1]
 
-	minRate = priceRange.split(',')[0]
-	maxRate = priceRange.split(',')[1]
+	minRate = @priceRange.split(',')[0]
+	maxRate = @priceRange.split(',')[1]
 
   amenities = params[:amenities]
 
@@ -123,10 +124,11 @@ class DatabaseController < ApplicationController
 			+ "cid=" + $gCid \
 			+ "&apiKey=" + $gApiKey \
 			+ "&numberOfResults=" + $gNumberOfResults \
-			+ "&destinationString=" + destinationString \
-			+ "&propertyName=" + propertyName \
-			+ "&stateProvinceCode=" + stateProvinceCode \
-			+ "&city=" + city \
+      + "&sort=" + @sort \
+			+ "&destinationString=" + @destinationString \
+			+ "&propertyName=" + @propertyName \
+			+ "&stateProvinceCode=" + @stateProvinceCode \
+			+ "&city=" + @city \
 			+ "&minStarRating=" + minStarRating \
 			+ "&maxStarRating=" + maxStarRating \
 			+ "&minRate=" + minRate \
@@ -202,6 +204,9 @@ class DatabaseController < ApplicationController
   			  @hotelList << Hotel.new(hotelSummary)
         end
 			end
+      if @sort == "PRICE" then
+        @hotelList.sort! { |a,b| a.hotelPrice <=> b.hotelPrice}
+      end
 		end
 
 	  end
