@@ -5,15 +5,20 @@
                 <h1>Search Results</h1>
 
                 <h5>Sort by:
-
+                    <div style="display:inline-block;">
                     <%= button_to 'Price', :controller => 'database', :action => 'getList', :method => 'post',
                         :params => {:sort => 'PRICE',:city=> $city, :state => $state,:name=>$name, :poi=>$poi,:departure=>$departure,:start_date=>$start_date } , class:"btn btn-primary" %>
+                    </div>
+                    <div style="display:inline-block;">
                     <%= button_to 'Rating', :controller => 'database', :action => 'getList', :method => 'post',
                         :params => {:sort => 'QUALITY',:city=> $city, :state => $state,:name=>$name, :poi=>$poi,:departure=>$departure,:start_date=>$start_date } %>
+                    </div>
+                    <div style="display:inline-block;">
                     <%= button_to 'Distance', :controller => 'database', :action => 'getList', :method => 'post',
                         :params => {:sort => 'PROXIMITY',:city=> $city, :state => $state,:name=>$name, :poi=>$poi,:departure=>$departure,:start_date=>$start_date } %>
-
+                    </div>
                 </h5>
+
             </div>
 
         </div>
