@@ -3,6 +3,17 @@
             <div class="col-lg-8">
 
                 <h1>Search Results</h1>
+
+                <h5>Sort by:
+
+                    <%= button_to 'Price', :controller => 'database', :action => 'getList', :method => 'post',
+                        :params => {:sort => 'PRICE',:city=> $city, :state => $state,:name=>$name, :poi=>$poi,:departure=>$departure,:start_date=>$start_date } , class:"btn btn-primary" %>
+                    <%= button_to 'Rating', :controller => 'database', :action => 'getList', :method => 'post',
+                        :params => {:sort => 'QUALITY',:city=> $city, :state => $state,:name=>$name, :poi=>$poi,:departure=>$departure,:start_date=>$start_date } %>
+                    <%= button_to 'Distance', :controller => 'database', :action => 'getList', :method => 'post',
+                        :params => {:sort => 'PROXIMITY',:city=> $city, :state => $state,:name=>$name, :poi=>$poi,:departure=>$departure,:start_date=>$start_date } %>
+
+                </h5>
             </div>
 
         </div>
@@ -80,6 +91,6 @@
 
     </div>
     <div style="margin-left: 480px;" class="btn-toolbar" role="toolbar" aria-label="...">
-        <button class="btn-group btn btn-inverse" type="button">Prev</button>
-        <button class="btn-group btn btn-inverse" type="button">Next</button>
+        <button class="btn-group btn btn-info" type="button">Prev</button>
+        <button class="btn-group btn btn-info" type="button">Next</button>
     </div>

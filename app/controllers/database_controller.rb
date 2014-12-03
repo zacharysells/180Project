@@ -5,8 +5,13 @@ require 'Destination'
 $gAPI_url = "http://dev.api.ean.com/ean-services/rs/hotel/v3"
 $gCid = "55505"
 $gApiKey = "vbcytyyspe2t9c64rv5vxmep"
-$gNumberOfResults = "10"
-
+$gNumberOfResults = "8"
+$city = ''
+$state =''
+$poi=''
+$name=''
+$departure=''
+$start_date=''
 
 $gERROR_CATEGORY_RESULT_NULL = "RESULT_NULL"
 $gERROR_CATEGORY_DATA_VALIDATION = "DATA_VALIDATION"
@@ -86,7 +91,7 @@ class DatabaseController < ApplicationController
 
 	#search parameters
     $sort = ['PRICE', 'QUALITY', 'PROXIMITY'].find{|s| s == params[:sort]}
-    $sort ||= 'PROXIMITY' #sort by default
+    $sort ||= 'CITY_VALUE' #sort by default
 
 	destinationString = params[:poi].gsub(' ', '+')
 	propertyName = params[:name].gsub(' ', '+')
@@ -97,7 +102,12 @@ class DatabaseController < ApplicationController
 	departure = DateFormat(params[:departure])
 	@arrivalDate = params[:start_date]
 	@departureDate = params[:departure]
-
+    $city = city
+    $state = stateProvinceCode
+    $poi= destinationString
+    $name= propertyName
+    $departure= params[:departure]
+    $start_date= params[:start_date]
 
 	#construct http request
 	request = $gAPI_url + "/list?" \
@@ -164,5 +174,4 @@ class DatabaseController < ApplicationController
 	  end
 
   end
-
 end
