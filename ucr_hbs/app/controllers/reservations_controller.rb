@@ -29,6 +29,26 @@ class ReservationsController < ApplicationController
                                             )
     redirect_to '/reservations/reservationSummary'
   end
+  
+  def modify
+    redirect_to '/reservations/modifyreservations'
+  end
+  
+  def update
+    @reservation = current_user.reservations.find(params[:id])
+    @reservation.arrival_date = Date.new(params[:arrival_date][:year].to_i, params[:arrival_date][:month].to_i, params[:arrival_date][:day].to_i)
+    @reservation.departure_date = Date.new(params[:departure_date][:year].to_i, params[:departure_date][:month].to_i, params[:departure_date][:day].to_i)
+    @reservation.save
+    
+    redirect_to '/welcome/user_profile'
+  end
+  
+  def delete
+    @reservation = current_user.reservations.find(params[:id])
+    @reservation.destroy
+    
+    redirect_to '/welcome/user_profile'
+  end 
 
   def index
     $id        = params[:hotelId]

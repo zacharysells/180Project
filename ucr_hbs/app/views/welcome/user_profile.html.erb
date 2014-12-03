@@ -58,6 +58,7 @@
                 <td><%= raw reservation.hotel_name %></td>
                 <td><%= reservation.arrival_date.to_formatted_s(:long_ordinal) %></td>
                 <td><%= reservation.departure_date.to_formatted_s(:long_ordinal) %></td>
+				<td> <%= button_to('Modify', reservations_modifyreservation_path, :params => {:id => reservation.id}, :class => 'btn btn-xs btn-primary') %> </td>
 			</tr>
 			<% end %>
         </tbody>

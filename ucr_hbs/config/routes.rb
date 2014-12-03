@@ -35,6 +35,10 @@ Rails.application.routes.draw do
   
   post 'reservations/validate_credit_card'
   
+  post 'reservations/modifyreservation'
+  post 'reservations/update'
+  post 'reservations/delete'
+  
   resources :reviews
   post 'reviews/new'
 
