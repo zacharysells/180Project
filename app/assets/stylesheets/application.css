@@ -14,7 +14,12 @@
  *= require_self
  *= require bootstrap-slider
  */
- 
+
+
+body {
+     background-color: #F7F7F7;
+}
+
 #star_rating_slider_style .slider-selection
 {
 	background: #8283FF;
@@ -24,13 +29,13 @@
 {
 	background: blue;
 }
-	
+
 #price_slider_style .slider-selection
 {
 	background: #428041;
 }
 
-#price_slider_style .slider-handle 
+#price_slider_style .slider-handle
 {
 	background: green;
 }
@@ -40,7 +45,3 @@ ul.dropdown-menu-form {
     max-height: 500px;
     overflow-y: scroll;
 }
- 
-<html>
-<title>This is My Layout!</title>
-</html>
