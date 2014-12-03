@@ -206,6 +206,10 @@ class DatabaseController < ApplicationController
 			end
       if @sort == "PRICE" then
         @hotelList.sort! { |a,b| a.hotelPrice <=> b.hotelPrice}
+
+      elsif @sort == "QUALITY" then
+        @hotelList.sort! { |a,b| b.hotelRating <=> a.hotelRating}
+
       end
 		end
 
