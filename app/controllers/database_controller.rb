@@ -5,7 +5,7 @@ require 'Destination'
 $gAPI_url = "http://dev.api.ean.com/ean-services/rs/hotel/v3"
 $gCid = "55505"
 $gApiKey = "vbcytyyspe2t9c64rv5vxmep"
-$gNumberOfResults = "7"
+$gNumberOfResults = "10"
 
 
 $gERROR_CATEGORY_RESULT_NULL = "RESULT_NULL"
@@ -158,7 +158,9 @@ class DatabaseController < ApplicationController
 			@hotelList << Hotel.new(hotelSummary)
 			@hotelList[i].thumbNailUrl = "http://images.travelnow.com" + response["HotelListResponse"]["HotelList"]["HotelSummary"][i]["thumbNailUrl"]
 	  end
-
+          if $sort == "PRICE" then
+              @hotelList.sort! { |a,b| a.hotelPrice <=> b.hotelPrice}
+          end
 	  end
 
   end
