@@ -6,7 +6,7 @@ $gAPI_url = "http://dev.api.ean.com/ean-services/rs/hotel/v3"
 $gCid = "55505"
 $gApiKey = "vbcytyyspe2t9c64rv5vxmep"
 $gNumberOfResults = "7"
-
+$sort = "CITY_VALUE"
 
 $gERROR_CATEGORY_RESULT_NULL = "RESULT_NULL"
 $gERROR_CATEGORY_DATA_VALIDATION = "DATA_VALIDATION"
@@ -85,6 +85,8 @@ class DatabaseController < ApplicationController
   def getList()
 
 	#search parameters
+    $sort = ['PRICE', 'QUALITY', 'PROXIMITY'].find{|s| s == params[:sort]}
+    $sort ||= 'PROXIMITY' #sort by default
 
 	destinationString = params[:poi].gsub(' ', '+')
 	propertyName = params[:name].gsub(' ', '+')
@@ -93,7 +95,6 @@ class DatabaseController < ApplicationController
 
 	arrival =  DateFormat(params[:start_date])
 	departure = DateFormat(params[:departure])
-
 	@arrivalDate = params[:start_date]
 	@departureDate = params[:departure]
 
@@ -102,6 +103,7 @@ class DatabaseController < ApplicationController
 	request = $gAPI_url + "/list?" \
 			+ "cid=" + $gCid \
 			+ "&apiKey=" + $gApiKey \
+            + "&sort=" + $sort \
 			+ "&numberOfResults=" + $gNumberOfResults \
 			+ "&destinationString=" + destinationString \
 			+ "&propertyName=" + propertyName \
@@ -158,5 +160,7 @@ class DatabaseController < ApplicationController
 	  end
 
 	  end
+
   end
+
 end
