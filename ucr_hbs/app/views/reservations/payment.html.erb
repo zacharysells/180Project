@@ -10,7 +10,10 @@
 <%= render file: ($cc_default == true ? '/reservations/_defaultcreditcard' : '/reservations/_creditcard') %>
 
 <% end %>
-<%= button_to 'Use Default Information', :controller => "reservations", :action => "fill_default_info" %>
+
+<% if current_user.payment_info.blank? == false %>
+	<%= button_to 'Use Default Information', :controller => "reservations", :action => "fill_default_info" %>
+<% end %>
 
 </div>
 
