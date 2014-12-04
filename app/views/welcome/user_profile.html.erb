@@ -1,0 +1,73 @@
+<% if user_signed_in? %>
+	
+<% else %>
+	<% redirect_to root_url %>
+<% end %>
+
+<h1>User Profile</h1>
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Past Bookings</div>
+
+  <!-- Table -->
+  <table class="table">
+    <thead>
+            <tr>
+                <th>Hotel Name</th>
+                <th>Arrival Date</th>
+                <th>Departure Date</th>
+                <th>Review?</th>
+            </tr>
+        </thead>
+        <tbody>
+        	<!-- Loop through here to fill table -->
+			<% current_user.reservations.where('arrival_date <= ?', Date.today).each do |reservation| %>
+			<tr>
+       			<td><%= raw reservation.hotel_name %></td>
+                <td><%= reservation.arrival_date.to_formatted_s(:long_ordinal) %></td>
+                <td><%= reservation.departure_date.to_formatted_s(:long_ordinal) %></td>
+				<% if current_user.reviews.exists?(:hotel_id => reservation.hotel_id) %>
+				<td> <span class="label label-success">Reviewed</span></td>
+				<% else %>
+				<td> <%= button_to('Review', '/reviews/new', :params => {:hotel_id => reservation.hotel_id}, :class => 'btn btn-xs btn-primary') %> </td>
+				<% end %>
+			</tr>
+			<% end %>
+        </tbody>
+  </table>
+</div>
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Upcoming Bookings</div>
+
+  <!-- Table -->
+  <table class="table">
+    <thead>
+            <tr>
+                <th>Hotel Name</th>
+                <th>Arrival Date</th>
+                <th>Departure Date</th>
+            </tr>
+        </thead>
+        <tbody>
+        	<!-- Loop through here to fill table -->
+			<% current_user.reservations.where('arrival_date > ?', Date.today).each do |reservation| %>
+			<tr>
+                <td><%= raw reservation.hotel_name %></td>
+                <td><%= reservation.arrival_date.to_formatted_s(:long_ordinal) %></td>
+                <td><%= reservation.departure_date.to_formatted_s(:long_ordinal) %></td>
+				<td> <%= button_to('Modify', reservations_modifyreservation_path, :params => {:id => reservation.id}, :class => 'btn btn-xs btn-primary') %> </td>
+			</tr>
+			<% end %>
+        </tbody>
+  </table>
+</div>
+
+<div class="btn-group" role="group" aria-label="...">
+	  <%= link_to 'Change Password', edit_user_registration_path, :method => :get, :class => "btn btn-default" %>  
+  	 <%= link_to 'Edit Default Payment Information', '/welcome/payment_info', :method => :get, :class => "btn btn-default" %>
+</div>
+
+<p></p>

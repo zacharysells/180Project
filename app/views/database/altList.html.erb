@@ -1,0 +1,65 @@
+<%= render file: "database/_searchform" %>
+
+<header>Sorry we could not find what you were looking for. Did you mean...</header>
+
+
+<style>
+.locations {
+    background-color:mediumturquoise;
+    color:white;
+    margin:20px;
+    padding:20px;
+}
+.more {
+  outline: none;
+  display: block;
+  width: 100%;
+  padding: 6px 0;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-bottom: 1px solid #aaa;
+  border-right: 1px solid #aaa;
+  background-color: #fff;
+  background-repeat: repeat-x;
+  background-position: left top;
+  font-size: 14px;
+  text-shadow: 1px 1px 1px #fff;
+  font-weight: bold;
+  height: 22px;
+  line-height: 1.5em;
+  margin-bottom: 6px;
+}
+
+.more:hover {
+  border: 1px solid #bbb;
+  text-decoration: none;
+  background-position: left -78px;
+}
+
+.more:active {
+  color: #666;
+  background-position: left -38px;
+}
+
+.round {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+</style>
+</head>
+
+<body>
+
+<button class="locations" type="button" style="height:150px;width:400px">
+<h2>Riverside, CA</h2>
+<p>Riverside CA hotels.....</p>
+</button>
+
+<br>
+
+<button class="locations" style="height:150px;width:400px">
+<h2>Riverside, PA</h2>
+<p>Riverside PA hotels.....</p>
+</button>
+
+</body>

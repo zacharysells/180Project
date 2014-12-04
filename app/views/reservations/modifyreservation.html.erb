@@ -1,0 +1,32 @@
+
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Modify your Reservation</div>
+  <!-- Table -->
+  <table class="table">
+    <thead>
+            <tr>
+                <th>Hotel Name</th>
+                <th>Arrival Date</th>
+                <th>Departure Date</th>
+            </tr>
+        </thead>
+        <tbody>
+			<% @reservation = current_user.reservations.find(params[:id]) %>
+			<%= form_tag :controller => 'reservations', :action => 'update', :method => 'post' do %>
+        	<!-- Loop through here to fill table -->
+			
+			<%= hidden_field_tag :id, params[:id] %>
+			<tr>
+                <td><%= raw @reservation.hotel_name %></td>
+                <td><%= select_date @reservation.arrival_date, prefix: :arrival_date, min: Date.today %></td>
+                <td><%= select_date @reservation.departure_date, prefix: :departure_date, min: Date.today+1 %></td>
+				<td><%= submit_tag("Update", :class => 'btn btn-xs btn-primary') %><td>
+				<% end %>
+				<td><%= button_to "Cancel", {:controller => 'reservations', :action => 'delete', :id => @reservation.id}, :method => 'post', :class => 'btn btn-xs btn-primary' %></td>
+			</tr>
+        </tbody>
+  </table>
+</div>
+
