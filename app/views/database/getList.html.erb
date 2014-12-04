@@ -6,15 +6,15 @@
                 <h5>Sort by:
                   <div style="display:inline-block;">
                     <%= button_to 'Price', :controller => 'database', :action => 'getList', :method => 'post',
-                    :params => {:sort => 'PRICE',:city=> @city, :state => @stateProvinceCode,:name=>@propertyName, :poi=>@destinationString,:departure=>$departureDate,:start_date=>$arrivalDate, :starRange => @starRange, :priceRange => @priceRange } , class:"btn btn-primary" %>
+                    :params => {:sort => 'PRICE',:city=> @city, :state => @stateProvinceCode,:name=>@propertyName, :poi=>@destinationString,:departure=>@departureDate,:arrival=>@arrivalDate, :starRange => @starRange, :priceRange => @priceRange } , class:"btn btn-primary" %>
                   </div>
                   <div style="display:inline-block;">
                     <%= button_to 'Rating', :controller => 'database', :action => 'getList', :method => 'post',
-                    :params => {:sort => 'QUALITY',:city=> @city, :state => @stateProvinceCode,:name=>@propertyName, :poi=>@destinationString,:departure=>$departureDate,:start_date=>$arrivalDate, :starRange => @starRange, :priceRange => @priceRange } , class:"btn btn-primary" %>
+                    :params => {:sort => 'QUALITY',:city=> @city, :state => @stateProvinceCode,:name=>@propertyName, :poi=>@destinationString,:departure=>@departureDate,:arrival=>@arrivalDate, :starRange => @starRange, :priceRange => @priceRange } , class:"btn btn-primary" %>
                   </div>
                   <div style="display:inline-block;">
                     <%= button_to 'Distance', :controller => 'database', :action => 'getList', :method => 'post',
-                    :params => {:sort => 'PROXIMITY',:city=> @city, :state => @stateProvinceCode,:name=>@propertyName, :poi=>@destinationString,:departure=>$departureDate,:start_date=>$arrivalDate, :starRange => @starRange, :priceRange => @priceRange } , class:"btn btn-primary" %>
+                    :params => {:sort => 'PROXIMITY',:city=> @city, :state => @stateProvinceCode,:name=>@propertyName, :poi=>@destinationString,:departure=>@departureDate,:arrival=>@arrivalDate, :starRange => @starRange, :priceRange => @priceRange } , class:"btn btn-primary" %>
                   </div>
                 </h5>
             </div>
