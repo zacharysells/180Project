@@ -1,27 +1,27 @@
 <h3>Credit Card Information</h3>
 <div class="form-group">
-	<%= text_field_tag(:first_name, nil, placeholder:"First Name") %> 
+	<%= text_field_tag(:first_name, current_user.payment_info.first_name, placeholder:"First Name") %> 
 	<br>
-	<%= text_field_tag(:last_name, nil, placeholder:"Last Name") %> 
+	<%= text_field_tag(:last_name, current_user.payment_info.last_name, placeholder:"Last Name") %> 
 	<br>
-	<%= text_field_tag(:ccn, nil, placeholder:"Card Number") %> 
+	<%= text_field_tag(:ccn, current_user.payment_info.ccn, placeholder:"Card Number") %> 
 	<br>
-	<%= text_field_tag(:cvs, nil, placeholder:"CVS") %> 
+	<%= text_field_tag(:cvs, current_user.payment_info.cvs, placeholder:"CVS") %> 
 	<br>
-	<%= text_field_tag(:expdate, nil, placeholder:"Expires (MM/YYYY)") %>
+	<%= text_field_tag(:expdate, current_user.payment_info.expiration_date, placeholder:"Expires (MM/YYYY)") %>
 	<br>
 	
 	<h3>Billing Address</h3>
 	<br>
-	<%= text_field_tag(:biladdname, nil, placeholder: "Full Name") %> 
+	<%= text_field_tag(:biladdname, current_user.payment_info.first_name + " " + current_user.payment_info.last_name, placeholder: "Full Name") %> 
 	<br>
-	<%= text_field_tag(:add1, nil, placeholder: "Street address") %> 
+	<%= text_field_tag(:add1, current_user.payment_info.address1, placeholder: "Street address") %> 
 	<br>
-	<%= text_field_tag(:add2, nil, placeholder: "Apartment, suite, etc.") %> 
+	<%= text_field_tag(:add2, current_user.payment_info.address2, placeholder: "Apartment, suite, etc.") %> 
 	<br>
-	<%= text_field_tag(:city, nil, placeholder: "City") %>
+	<%= text_field_tag(:city, current_user.payment_info.city, placeholder: "City") %>
 	<br>
-	<%= text_field_tag(:state, nil, placeholder: "State/Province/Region") %>
+	<%= text_field_tag(:state, current_user.payment_info.state, placeholder: "State/Province/Region") %>
 	<br><br>
 	Country  <select id="countries" name="countries">
 		<option value="United States">United States</option>
@@ -273,5 +273,6 @@
 	<br><br>
 	<div class="form-actions">
 	<%= submit_tag("Confirm") %>
-    </div>
+	</div>
 </div>
+

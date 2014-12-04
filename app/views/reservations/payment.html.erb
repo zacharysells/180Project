@@ -2,4 +2,15 @@
 <span class="label label-danger">Invalid Credit Card Information</span>
 <% end %>
 
-<%= render file: '/reservations/_creditcard' %>
+<h1>Payment for your Reservation</h1>
+
+<%= form_tag :controller => 'reservations', :action => 'validate_credit_card', :method => 'post' do %> 
+<div class="jumbotron">
+
+<%= render file: ($cc_default == true ? '/reservations/_defaultcreditcard' : '/reservations/_creditcard') %>
+
+<% end %>
+<%= button_to 'Use Default Information', :controller => "reservations", :action => "fill_default_info" %>
+
+</div>
+

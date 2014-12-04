@@ -11,7 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141112025323) do
+ActiveRecord::Schema.define(version: 20141119053921) do
+
+  create_table "payment_infos", force: true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "address1"
+    t.string   "address2"
+    t.string   "state"
+    t.string   "country"
+    t.string   "ccn"
+    t.string   "cvs"
+    t.date     "expiration_date"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "city"
+  end
+
+  add_index "payment_infos", ["user_id"], name: "index_payment_infos_on_user_id"
 
   create_table "reservations", force: true do |t|
     t.integer  "hotel_id"

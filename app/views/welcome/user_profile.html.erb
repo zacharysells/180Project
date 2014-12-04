@@ -58,11 +58,16 @@
                 <td><%= raw reservation.hotel_name %></td>
                 <td><%= reservation.arrival_date.to_formatted_s(:long_ordinal) %></td>
                 <td><%= reservation.departure_date.to_formatted_s(:long_ordinal) %></td>
+				<td> <%= button_to('Modify', reservations_modifyreservation_path, :params => {:id => reservation.id}, :class => 'btn btn-xs btn-primary') %> </td>
 			</tr>
 			<% end %>
         </tbody>
   </table>
 </div>
 
-<%= button_to 'Change Password', edit_user_registration_path, :class => "button", :method => :get %>
+<div class="btn-group" role="group" aria-label="...">
+	  <%= link_to 'Change Password', edit_user_registration_path, :method => :get, :class => "btn btn-default" %>  
+  	 <%= link_to 'Edit Default Payment Information', '/welcome/payment_info', :method => :get, :class => "btn btn-default" %>
+</div>
+
 <p></p>

@@ -17,13 +17,8 @@ class ReservationsController < ApplicationController
   $departure  
   
   $cc_errors
+  $cc_default
   
-  def require_login
-    if user_signed_in? == false
-      redirect_to
-    end
-  end
-
   def create
     @user = current_user
     @reservation = @user.reservations.create(:hotel_id => $id,
@@ -34,6 +29,26 @@ class ReservationsController < ApplicationController
                                             )
     redirect_to '/reservations/reservationSummary'
   end
+  
+  def modify
+    redirect_to '/reservations/modifyreservations'
+  end
+  
+  def update
+    @reservation = current_user.reservations.find(params[:id])
+    @reservation.arrival_date = Date.new(params[:arrival_date][:year].to_i, params[:arrival_date][:month].to_i, params[:arrival_date][:day].to_i)
+    @reservation.departure_date = Date.new(params[:departure_date][:year].to_i, params[:departure_date][:month].to_i, params[:departure_date][:day].to_i)
+    @reservation.save
+    
+    redirect_to '/welcome/user_profile'
+  end
+  
+  def delete
+    @reservation = current_user.reservations.find(params[:id])
+    @reservation.destroy
+    
+    redirect_to '/welcome/user_profile'
+  end 
 
   def index
     $id        = params[:hotelId]
@@ -44,23 +59,13 @@ class ReservationsController < ApplicationController
     $price     = (params[:price].to_i * ($departure - $arrival)).to_i
     $rate = params[:price]
     $cc_errors = false
+    $cc_default = false
     redirect_to '/reservations/payment'
   end
   
-  def clean_index
-    $name      = params[:name]
-    $city      = params[:city]
-    $arrival   = Date.new(params[:arrivalDate][:year].to_i, params[:arrivalDate][:month].to_i, params[:arrivalDate][:day].to_i)
-    $departure = Date.new(params[:departureDate][:year].to_i, params[:departureDate][:month].to_i, params[:departureDate][:day].to_i) 
-    $price     = (params[:price].to_i * ($departure - $arrival)).to_i
-    $cc_errors = false
+  def fill_default_info
+    $cc_default = true
     redirect_to '/reservations/payment'
-  end
-  
-  def confirmation
-  end
-  
-  def payment
   end
   
   def validate_credit_card
