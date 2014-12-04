@@ -100,12 +100,11 @@ class DatabaseController < ApplicationController
 	@stateProvinceCode = params[:state].gsub(' ', '+')
 	@city = params[:city].gsub(' ', '+')
 
-	arrival =  DateFormat(params[:start_date])
+	arrival =  DateFormat(params[:arrival])
 	departure = DateFormat(params[:departure])
 
-	$arrivalDate = params[:start_date]
-	$departureDate = params[:departure]
-
+	@arrivalDate = params[:arrival]
+	@departureDate = params[:departure]
 
 	@priceRange = params[:priceRange]
 	@starRange = params[:starRange]

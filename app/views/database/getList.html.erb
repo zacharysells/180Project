@@ -36,11 +36,11 @@
 						<% hotelStarLevel = Integer(@hotelList[i].hotelRating) %>
 
 						<% (1..(hotelStarLevel)).each do |i| %>
-							<img width="30" height="30" src="/assets/star_rating.png" alt="...">
+							<img width="18" height="18" src="/assets/star_rating.png" alt="...">
 						<% end %>
 
 						<% (1..(5 - hotelStarLevel)).each do |i| %>
-							<img width="30" height="30" src="/assets/outlined-star-grey.png" alt="...">
+							<img width="18" height="18" src="/assets/outlined-star-grey.png" alt="...">
 						<% end %>
 					</a>
 				</div>

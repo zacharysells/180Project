@@ -11,7 +11,7 @@
 	</div>
 	<div class="form-group">
 		<%= label_tag(:arrival	, "Arrival Date") %>
-		<%= select_date Date.today, prefix: :start_date, min: Date.today %>&nbsp;
+		<%= select_date Date.today, prefix: :arrival, min: Date.today %>&nbsp;
 		<%= label_tag(:departure, "Departure Date") %>
 		<%= select_date Date.today+1, prefix: :departure %>
 	</div>
